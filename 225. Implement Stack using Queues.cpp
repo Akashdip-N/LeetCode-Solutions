@@ -1,5 +1,18 @@
 /*
     https://leetcode.com/problems/implement-stack-using-queues/description/
+
+    Explanation:-
+    * We have constaraint that we can use only stack.
+    * The time complexity of push is O(1) and pop is O(n) in worst case.
+
+    What we are doing is:-
+    * Pushing values to queue q1.
+    * Since, our main queue is q1,
+        we will check if q1 is empty, then we will push the value to q1.
+    * Making sure, both the queses are the same by using the swap() function.
+    * For the pop operation, we will pop the front element from q1.
+    * For the top operation, we will return the front element from q1.
+    * Empty operation will return true if q1 is empty.
 */
 class MyStack {
 private:
@@ -20,7 +33,7 @@ public:
     }
 
     int pop() {
-       int x =  q1.front();
+       int x =  top();
        q1.pop();
        return x;
     }
