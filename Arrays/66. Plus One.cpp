@@ -1,28 +1,13 @@
 /*
     https://leetcode.com/problems/plus-one/
 */
-// This is my solution but was incorrect in other test cases
-// because when the test cases are very large then this function is not working properly
-class Solution {
-public:
-    vector<int> plusOne(vector<int>& digits) {
-        long long sum = 0, b = (digits.size()-1);
-        for (int i = 0; i < digits.size(); i++, b--)
-            sum = sum + (pow(10, b)*digits[i]);
+/*
+    Solution Approach:-
 
-        sum = sum + 1;
-        vector<int> a;
-        while (sum > 0){
-            a.push_back(sum%10);
-            sum /= 10;
-        }
-        reverse(a.begin(), a.end());
-        return a;
-    }
-};
-
-/*-----------------------------------------------------*/
-
+    * Checking if the digit is 9 then replacing it with 0
+    * If we encounter any digit other than 9 just increment the value and return the array.
+    * Outside the loop, if the left-most digit is 0 then add 1 in front of it.
+*/
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
@@ -33,6 +18,7 @@ public:
                 ++digits[i];
                 return digits;
             }
+
         if(digits[0] == 0)
             digits.insert(digits.begin(), 1);
         return digits;
