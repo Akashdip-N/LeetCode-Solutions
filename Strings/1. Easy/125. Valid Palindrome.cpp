@@ -1,25 +1,39 @@
 /*
     https://leetcode.com/problems/valid-palindrome/
 */
+/*
+    Solution Approach:-
+
+    * This is a two pointer problem.
+    * Taking two pointers i and j, pointing to the start and end of the string.
+    * Running the loop till (i < j)
+    * checking if either left or the right side of the character are alphanumeric,
+        then either incrementing or decrementing the counter
+
+    * If the characters are not equal, then return false.
+*/
 class Solution {
 public:
     bool isPalindrome(string s) {
-        string a = "";
-        int size = s.size();
-        for (int i = 0; i < size; i++)
-            if ((s[i] >= 'A' && s[i] <= 'Z'))
-                a += tolower(s[i]);
-            else if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9'))
-                a += s[i];
+        bool ret = true;
+        int i = 0, j = s.size() - 1;
 
-        int l = 0, r = (a.size() - 1);
-        while (l < r){
-            if(a[l] != a[r])
+        while(i < j){
+            if(!isalnum(s[i])){
+                i++;
+                continue;
+            }
+            if(!isalnum(s[j])){
+                j--;
+                continue;
+            }
+
+            if(tolower(s[i]) != tolower(s[j]))
                 return false;
 
-            l++;
-            r--;
+            i++;
+            j--;
         }
-        return true;
+        return ret;
     }
 };
