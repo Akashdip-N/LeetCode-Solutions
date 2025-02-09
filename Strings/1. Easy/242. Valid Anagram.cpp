@@ -1,22 +1,35 @@
 /*
     https://leetcode.com/problems/valid-anagram/
 */
+/*
+    Solution Approach:
+    * We are using a hash map to store the frequency of each character in the string s.
+    * Then we are iterating over the string t and
+        checking if the character is present in the hash map.
+    * If it is present, we are decrementing the frequency of the character.
+    * If the frequency of the character becomes 0,
+        we are removing the character from the hash map,
+            which means that the character is present in both the strings.
+*/
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        sort(s.begin(), s.end());
-        sort(t.begin(), t.end());
-        int size = 0;
-        if(s.size() > t.size())
-            size  = s.size();
-        else
-            if(s.size() < t.size())
-            size = t.size();
-        else if (s.size() == t.size())
-            size = t.size();
-        for(int i = 0; i < size; i++)
-            if(s[i]!= t[i])
+        if(s.size() != t.size())
+            return false;
+
+        unordered_map<char, int> mp;
+
+        for(int i = 0; i < s.size(); i++)
+            mp[s[i]]++;
+
+        for(auto i : t){
+            if(mp.find(i) == mp.end())
                 return false;
+            mp[i]--;
+            if(mp[i] == 0)
+                mp.erase(i);
+        }
+
         return true;
     }
 };
