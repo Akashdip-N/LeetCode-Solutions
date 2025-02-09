@@ -1,41 +1,27 @@
 /*
     https://leetcode.com/problems/first-unique-character-in-a-string/
 */
-
+/*
+    Solution Approach:
+    * We are using a hash map to store the frequency of each character in the string.
+    * Then we are iterating over the string and
+        checking if the frequency of the character is 1.
+    * If it is 1, we are returning the index of the character.
+    * If no character has a frequency of 1, we are returning -1.
+*/
 class Solution {
 public:
     int firstUniqChar(string s) {
-        unordered_map<char,int> ump(26);
-        for(int i = 0; i < s.size(); i++)
-            ump[s[i]]++;
+        int size = s.size();
+        unordered_map<char, int> mp;
 
-        for(int i = 0; i < s.size(); i++)
-            if(ump[s[i]] == 1)
+        for(int i = 0; i < size; i++)
+            mp[s[i]]++;
+
+        for(int i = 0; i < size; i++)
+            if(mp[s[i]] == 1)
                 return i;
-        return -1;
-    }
-};
 
-/**********************************************************************/
-class Solution {
-public:
-    int firstUniqChar(string s) {
-        int ret = -1;
-        char ch = 0;
-        if(s.length() == 1 )
-            return 0;
-        else
-            for (int i = 0; i < s.length() - 1; i++){
-                size_t found = s.find(s[i]);
-                if(i < (s.length() - 1)){
-                    if(found != string::npos){
-                        if((s.find(s[i], found+1)) == string::npos)
-                            return i;
-                    }
-                }
-                else
-                    return i;
-            }
-        return ret;
+        return -1;
     }
 };
