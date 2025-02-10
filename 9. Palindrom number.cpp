@@ -4,22 +4,39 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        bool ch = true;
-        if(x < 0)
-            ch = false;
-        else{
-            long long int num = 0, temp = x, d = 0;
-            while (temp > 0)
-            {
-                d = temp % 10;
-                temp /= 10;
-                num = ((num * 10) + d);
-            }
-            if (num == x)
-                ch = true;
-            else
-                ch = false;
+        if(x < 0) return false;
+        int temp = x;
+        long long int rev = 0;
+
+        while(x > 0){
+            rev = rev * 10 + x % 10;
+            x /= 10;
         }
-        return ch;
+
+        return temp == rev;
+    }
+};
+
+/*                      USING STACK                  */
+/*                    BAD TIME COMPLEXITY            */
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x < 0) return false;
+        stack<int> s;
+        int temp = x;
+        while(x > 0){
+            s.push(x % 10);
+            x /= 10;
+        }
+
+        while(!s.empty()){
+            if(s.top() != temp % 10)
+                return false;
+
+            s.pop();
+            temp /= 10;
+        }
+        return true;
     }
 };
