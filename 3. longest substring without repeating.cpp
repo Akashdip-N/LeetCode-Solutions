@@ -38,7 +38,7 @@ public:
     }
 };
 
-/*                       HAS MAP APPROACH                          */
+/*                       HASH MAP APPROACH                          */
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {

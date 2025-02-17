@@ -1,34 +1,40 @@
 /*
     https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 */
-
 class Solution {
-private:
-    void letterCombinations(string digits, vector<string>& output,
-                            string &temp, vector<string>& pad, int index){
-        if(index == digits.size()){
-            output.push_back(temp);
+public:
+    void letterCombinationsUtil(
+        string digits, vector<string> mp, vector<string> &res, string s, int index
+    ) {
+        if(index == digits.size()) {
+            res.push_back(s);
             return;
         }
-        string value = pad[digits[index]-'0'];
-        for(int i=0; i<value.size(); i++){
-            temp.push_back(value[i]);
-            letterCombinations(digits, output, temp, pad, index+1);
-            temp.pop_back();
+
+        // Get the string for the current digit
+        string str = mp[digits[index] - '0'];
+
+        for(int i = 0; i < str.size(); i++) {
+            s.push_back(str[i]);
+            letterCombinationsUtil(digits, mp, res, s, index + 1);
+            s.pop_back();
         }
     }
-public:
+
     vector<string> letterCombinations(string digits) {
-        if(digits.empty())
-            return {};
-        
-        vector<string> pad = {
-            "", "", "abc", "def", "ghi", "jkl",
-            "mno", "pqrs", "tuv", "wxyz"
-            };
-        vector<string> output;
-        string temp;
-        letterCombinations(digits, output, temp, pad, 0);
-        return output;
+        vector<string> res;
+
+        if(digits.size() == 0)
+            return res;
+
+        vector<string> mp = {
+            "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+        //   0   1    2      3      4      5      6      7       8       9
+        };
+
+        string s = "";
+
+        letterCombinationsUtil(digits, mp, res, s, 0);
+        return res;
     }
 };
