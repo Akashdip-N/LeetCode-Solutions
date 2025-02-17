@@ -3,11 +3,13 @@
 */
 /*
     Solution Approach:
-    * We are iterating from 1 to n.
-    * If the number is divisible by 3 and 5, we are adding "FizzBuzz" to the vector.
-    * If the number is divisible by 3, we are adding "Fizz" to the vector.
-    * If the number is divisible by 5, we are adding "Buzz" to the vector.
-    * If the number is not divisible by 3 or 5, we are adding the number to the vector.
+    * First We will check if the number is divisible by 3
+        if yes, then will check if it is divisible by 5
+            if yes, then will add "FizzBuzz" to the vector
+            else will add "Fizz" to the vector
+    * else will check if it is divisible by 5
+            if yes, then will add "Buzz" to the vector
+    * else will add the number to the vector
 */
 
 class Solution {
