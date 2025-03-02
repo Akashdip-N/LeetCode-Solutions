@@ -1,6 +1,11 @@
 /*
     https://leetcode.com/problems/reverse-integer/
 */
+/*
+    Solution:-
+    * Modulus division to get the last digit of the number.
+    * If the result is greater than INT_MAX or less than INT_MIN, we return 0.
+*/
 class Solution {
 public:
     int reverse(int x) {
