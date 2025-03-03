@@ -1,21 +1,17 @@
 /*
     https://leetcode.com/problems/valid-palindrome/
 */
+/**************************** TWO POINTER SOLUTION *************************/
 /*
     Solution Approach:-
-
-    * This is a two pointer problem.
-    * Taking two pointers i and j, pointing to the start and end of the string.
-    * Running the loop till (i < j)
-    * checking if either left or the right side of the character are alphanumeric,
-        then either incrementing or decrementing the counter
-
-    * If the characters are not equal, then return false.
+    * Checking characters from both ends of the string.
+    * If they are not equal, return false.
+    * If they are equal, move the pointers towards the center
+        and return true.
 */
 class Solution {
 public:
     bool isPalindrome(string s) {
-        bool ret = true;
         int i = 0, j = s.size() - 1;
 
         while(i < j){
@@ -30,10 +26,10 @@ public:
 
             if(tolower(s[i]) != tolower(s[j]))
                 return false;
-
             i++;
             j--;
         }
-        return ret;
+
+        return true;
     }
 };
