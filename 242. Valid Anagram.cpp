@@ -19,8 +19,8 @@ public:
 
         unordered_map<char, int> mp;
 
-        for(int i = 0; i < s.size(); i++)
-            mp[s[i]]++;
+        for(auto i : s)
+            mp[i]++;
 
         for(auto i : t){
             if(mp.find(i) == mp.end())
