@@ -1,38 +1,39 @@
 /*
     https://leetcode.com/problems/merge-two-sorted-lists/
 */
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+/*
+    Solution Approach:-
+    * Storing the lowest value first then
+        moving to the next node.
+    * If traversal of any of the one list is complete,
+        then we can simply append the remaining list to the result.
+    * Returning the ret->next because
+        the first value of the node is a null pointer.
+*/
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* List1, ListNode* List2) {
-        ListNode *result = new ListNode();
-        ListNode *head = result;
-        while(List1 != nullptr && List2 != nullptr){
-            if(List1->val < List2->val){
-               result->next = List1;
-               List1 = List1->next;
-            }else{
-              result->next = List2;
-              List2 = List2->next;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode *node = new ListNode;
+        ListNode *ret = node;
+
+        while (list1 != nullptr && list2 != nullptr) {
+            if(list1->val < list2->val){
+                node->next = list1;
+                list1 = list1->next;
             }
-            
-            result = result->next;
-        }       
-        
-        if(List1!=nullptr)
-            result->next=List1;
+            else{
+                node->next = list2;
+                list2 = list2->next;
+            }
+
+            node = node->next;
+        }
+
+        if(list1 == nullptr)
+            node->next = list2;
         else
-            result->next=List2;
-        
-        return head->next;
+            node->next = list1;
+
+        return ret->next;
     }
 };
