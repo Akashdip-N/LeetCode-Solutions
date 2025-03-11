@@ -1,55 +1,79 @@
 /*
     https://leetcode.com/problems/intersection-of-two-linked-lists/
 */
+/*
+    Solution Approach:- Using Two Pointers
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+    Time Complexity: O(n+m)
+    Space Complexity: O(1)
+
+    The time complexity of this solution is good, and the space complexity is best!
+*/
 class Solution {
-    // The runtime of this solution is 708 ms
+public:
+    int get_size(ListNode* node){
+        int size = 0;
+        while(node != nullptr){
+            size++;
+            node = node->next;
+        }
+        return size;
+    }
+
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int sizeA = get_size(headA);
+        int sizeB = get_size(headB);
+
+        while(sizeA > sizeB){
+            headA = headA->next;
+            sizeA--;
+        }
+
+        while(sizeB > sizeA){
+            headB = headB->next;
+            sizeB--;
+        }
+
+        while(headA != headB){
+            headA = headA->next;
+            headB = headB->next;
+        }
+
+        return headA;
+    }
+};
+
+/*****************************************************************************/
+/*
+    Solution Approach:- Using Hash-Map to store visited nodes
+
+    Time Complexity: O(n+m)
+    Space Complexity: O(n)
+
+    The time complexity of this solution is good, but the space complexity is poor!
+*/
+class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         if(headA == nullptr || headB == nullptr)
             return nullptr;
-        else{
-            ListNode *temp;
-            while (headA != NULL){
-                temp = headB;
-                while (temp != NULL){
-                    if(headA == temp)
-                    return headA;
-                    temp = temp->next;
-                }
-                headA = headA->next;
+
+        unordered_map<ListNode*,int> visited;
+
+        while(headA != nullptr){
+            visited[headA] = 1;
+            headA = headA->next;
+        }
+
+        while(headB != nullptr){
+            if(visited.find(headB) != visited.end()){
+                ListNode* ret = headB;
+                return ret;
             }
+
+            headB = headB->next;
         }
+
         return nullptr;
-    }
-};
-
-/**************************************************************************/
-
-class Solution {
-    // The runtime of this solution is 38 ms
-public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode *first = headA, *second = headB;
-        while(first != second) {
-            if(!first)
-                first = headB;
-            else
-                first = first->next;
-
-            if(!second)
-                second = headA;
-            else
-                second = second->next;
-        }
-        return first;
     }
 };
