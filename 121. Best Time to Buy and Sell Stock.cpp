@@ -2,24 +2,20 @@
     https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 */
 /*
-    Solution Approach:-
-
     Ex:- [7,1,5,3,6,4]
-    Ans:- 5, becasue the best time to buy is 1 and best time to sell is 6,
-             so the profit is 6-1 = 5
+    Ans:- 5
+    Explanation:- Buy at day 2 and sell at day 4, profit is 6 - 1 = 5
+
+    Solution Approach:- Sliding Window Problem
 
     To implement this solution,
-
-    1. Initialize min = prices[0] and profit = 0
-    2. Traverse the array from 1 to n
-        a. If min > prices[i], which means the current price is less than the min,
-            then update min = prices[i]
-
-        b. Else, if profit < (prices[i] - min),
-            which means that the
-                current profit is more than the difference between the current price and min,
-            then update profit = prices[i] - min
-    3. Return profit
+    * Store the 1st day price as min and profit as 0
+    * Iterate over the array and check if the current price is less than min
+        * If yes, update min
+    * Else check if the profit is less than the current price - min
+        * If yes, update profit
+    * Else do nothing
+    * Return profit
 */
 class Solution {
 public:
