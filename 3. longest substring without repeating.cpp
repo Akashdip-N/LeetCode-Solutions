@@ -1,19 +1,19 @@
 /*
     https://leetcode.com/problems/longest-substring-without-repeating-characters/
 */
+/************************ SLIDING WINDOW APPROACH ************************* */
 /*
+    Solution Approach:- Sliding Window Approach
 
-    Solution Approach:-
-
-    1. We will use a sliding window approach.
-    2. We will use a set to store the characters.
-    3. We will keep track of the left and right pointers.
-    4. If the character is already present in the set,
-        we will remove the character from the set and increment the left pointer.
-    5. We will keep track of the maximum length of the substring.
-    6. We will return the maximum length of the substring.
+    * Using set to store the unique characters.
+    * Using for loop to iterate over the string.
+    * Using a while loop to check for repeating characters
+        in the set and incrementing the left pointer
+            and removing the left character from the set.
+    * Storing the unique characters in the set.
+    * Calculating the max length of the substring.
+    * Returning the max length.
 */
-/*                SLIDING WINDOW APPROACH                        */
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -38,7 +38,20 @@ public:
     }
 };
 
-/*                       HASH MAP APPROACH                          */
+/************************ HASH MAP APPROACH ************************* */
+/*
+    Solution Approach:- Using Hash Map
+
+    * Using a hash-map to store the character and its index.
+    * Using a loop to iterate over the string.
+    * Checking if the character is already present in the hash-map.
+        If yes, updating the left pointer to the max of th
+            current left pointer and the index of the character.
+    * Storing the unique characters in the hash-map.
+    * Calculating the max length of the substring.
+    * Returning the max length.
+*/
+
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -46,8 +59,13 @@ public:
         if(n == 0)
             return 0;
 
-        int i = 0, j = 0, ans = 0;
+        int i = 0, ans = 0;
+
+        // <character, index>
         unordered_map<char, int> mp;
+
+        // abcabc
+        // 012345
 
         for(int j = 0; j < n; j++){
             if(mp.find(s[j]) != mp.end())
