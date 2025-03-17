@@ -1,15 +1,15 @@
 /*
     https://leetcode.com/problems/maximum-depth-of-binary-tree/
 */
-
+/*
+    Time & Space Complexity: O(n) for all the approaches
+*/
 /*
     Solution Approach: Recursive DFS
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-
     * Recursively; Calculating and returning the maximum depth using DFS,
 */
+
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
