@@ -65,9 +65,9 @@ public:
 /*
     Solution Approach: Iterative DFS, using stack
 
-    * Keeping a depth variable to track the depth of the tree.
-    * Storing the nodes of each level in a stack.
+    * Using stack to store the node and its depth.
     * Iterating through each level and updating the depth.
+    * Comparing and storing the maximum depth.
     * Returning the final depth.
 */
 
