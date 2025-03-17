@@ -2,17 +2,17 @@
     https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
 */
 /*
-    Solution Approach:
-    * We will run 2 loops, one for the haystack and one for the needle.
-    * The outer loop will run for the length of the haystack.
-    * The inner loop will run for the length of the needle.
-    * The inner loop has been set the following conditions:-
-        i. Counter variable (j) < size of the needle string.
-        ii. Sum of the counter variable of,
-            inner loop(j) and outer loop (i) is < size of haystack string.
-        iii. The character of needle string is same as the haystack string.
-    * We are keeping a variable to check if the inner loop has been
-        exectued till the end of the needle string.
+    Solution Approach: Two Pointers, String Comparison
+
+    * Storing the size of both the strings
+    * Using a for loop iterate over the main string
+    * Using inner while loop to compare the character of the main string,
+        with the other string.
+    * Running the inner while loop until,
+        the count of other string is less than the size of the main string.
+    * Returning the starting index of the first occurrence,
+        of the needle string if and only if the count of,
+            the occurance of the needle string is equal to the size of the needle string.
 */
 
 class Solution {
