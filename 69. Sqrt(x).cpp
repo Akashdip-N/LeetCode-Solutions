@@ -19,8 +19,12 @@
             else,
                 if the square of the mid is less than the number,
                     which means the square of the next number will be greater than the number,
-                        hence, we store the mid value in ans,
-                            and move the left side to mid + 1.
+                        (
+                            hence, we store the mid value in ans,
+                                we are storing the number because we have to return
+                                    an integer value of the square root
+                        )
+                        and move the left side to mid + 1.
             else,
                 we will store mid - 1 in the right side,
                     thus reducing the search space.
@@ -40,6 +44,7 @@ public:
                 return mid;
             else
                 if (square < x) {
+                    // when the sqrt value is not a integer.
                     ans = mid;
                     left = mid + 1;
                 }
