@@ -1,9 +1,11 @@
 /*
     https://leetcode.com/problems/maximum-subarray/description/
-
+*/
+/***************** Using Kadane's Algorithm ***************************** */
+/*
     Time Complexity:- O(n), Space Complexity:- O(1)
 
-    Approach:- Using Kadane's Algorithm
+    Approach:-
         * Iterating from the second element to the last element of the array.
         * Updating the current sum based on greater in value of the,
             current element
