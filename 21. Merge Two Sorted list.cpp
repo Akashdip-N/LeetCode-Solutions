@@ -2,13 +2,36 @@
     https://leetcode.com/problems/merge-two-sorted-lists/
 */
 /*
-    Solution Approach:-
-    * Storing the lowest value first then
-        moving to the next node.
-    * If traversal of any of the one list is complete,
-        then we can simply append the remaining list to the result.
-    * Returning the ret->next because
-        the first value of the node is a null pointer.
+    Solution Approach:- Recursive Method
+
+    Explanation:- Recursively checking the lowest value and moving to the next node,
+        until one of the lists is empty, then appending the rest of the other list.
+*/
+class Solution {
+    public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (l1 == NULL) return l2;
+        if (l2 == NULL) return l1;
+
+        ListNode* node = new ListNode();
+        if (l1->val < l2->val) {
+            node->val = l1->val;
+            node->next = mergeTwoLists(l1->next, l2);
+        } else {
+            node->val = l2->val;
+            node->next = mergeTwoLists(l1, l2->next);
+        }
+
+        return node;
+    }
+};
+
+/****************************************************************************/
+/*
+    Solution Approach:- Iterative Method, Two Pointers
+
+    Explanation:- Storing the lowest value first then moving to the next node,
+        until one of the lists is empty, then appending the rest of the other list.
 */
 class Solution {
 public:
