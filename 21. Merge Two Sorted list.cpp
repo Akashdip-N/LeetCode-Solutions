@@ -10,8 +10,13 @@
 class Solution {
     public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if (l1 == NULL) return l2;
-        if (l2 == NULL) return l1;
+        // If l1 is empty, return l2
+        if (!l1)
+            return l2;
+
+        // If l2 is empty, return l1
+        if (!l2)
+            return l1;
 
         ListNode* node = new ListNode();
         if (l1->val < l2->val) {
