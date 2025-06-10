@@ -1,6 +1,7 @@
 /*
     https://leetcode.com/problems/swap-nodes-in-pairs
 */
+/***********************8****** RECURSION *********************************/
 /*
     Solution Approach:- Using Recursion
     Time Complexity: O(n)
@@ -32,9 +33,9 @@ public:
     }
 };
 
-/*****************************************************************************/
+/*********************** TWO POINTER APPROACH *****************************/
 /*
-    Solution Approach:- Iterative Approach
+    Solution Approach:- Using Two Pointer
     Time Complexity: O(n)
     Space Complexity: O(1) for pointers
         n = number of nodes in the linked list
