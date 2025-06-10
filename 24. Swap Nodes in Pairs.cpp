@@ -1,7 +1,7 @@
 /*
     https://leetcode.com/problems/swap-nodes-in-pairs
 */
-/***********************8****** RECURSION *********************************/
+/***************************** RECURSION *********************************/
 /*
     Solution Approach:- Using Recursion
     Time Complexity: O(n)
