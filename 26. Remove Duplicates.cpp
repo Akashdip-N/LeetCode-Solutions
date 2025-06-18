@@ -2,47 +2,33 @@
     https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 */
 /*
-    2-pointer solution:
+    Solution Approach: Two Pointers
+    Time Complexity: O(n), n = size of the input array
+    Space Complexity: O(1), in-place modification of the input array
 
-    * Using 2 pointers, one to keep a check on the unique elements and
-        the other to iterate through the array.
+    Explanation:
+        i. Store the position of the first element from the sorted array in `pos`.
+        ii. Create a variable `count` to keep track of the number of unique elements.
+        iii. Iterate through the array starting from the second element,
+                and check if the current element is different from the element at `pos`,
+                    if true then swap the current element with the element at `pos`,
+                        and increment the `count` of unique elements.
+        iv. Return the count of unique elements.
 */
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-            int count = 1;
-            for(int i = 1; i < nums.size(); i++)
-                if(nums[i] != nums[i - 1]){
-                    nums[count] = nums[i];
-                    count++;
-                }
+        int pos = 0;
+        int count = 1;
 
-            return count;
+        for(int i = 1; i < nums.size(); i++) {
+            if(nums[i] != nums[pos]) {
+                pos++;
+                nums[pos] = nums[i];
+                count++;
+            }
         }
-};
 
-/****************************************************************************/
-/*
-    My own solution:
-
-    * Stack to keep a check of the unique elements.
-    * Vector to store the unique elements.
-    * Copy the vector to the original array.
-*/
-class Solution {
-public:
-    int removeDuplicates(vector<int>& nums) {
-            stack<int> s;
-            vector<int> arr;
-
-            for(auto i : nums)
-                if(s.empty() || s.top() != i){
-                    s.push(i);
-                    arr.push_back(i);
-                }
-
-            nums.clear();
-            nums = arr;
-            return nums.size();
-        }
+        return count;
+    }
 };
