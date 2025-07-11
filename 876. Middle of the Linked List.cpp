@@ -19,6 +19,11 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
+
+        // Edge case: if the list is empty, return nullptr
+        if (!head)
+            return nullptr;
+
         ListNode *slow = head, *fast = head;
 
         while(fast && fast->next) {
