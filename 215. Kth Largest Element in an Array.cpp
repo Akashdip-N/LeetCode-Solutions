@@ -25,20 +25,3 @@ public:
         return pq.top();
     }
 };
-
-/************************************************************************/
-/*
-    Solution Approach: Using Sorting
-
-    * Sorting the array in ascending order.
-        and returning the kth largest element from the end of the array.
-
-    THIS IS NOT VALID SINCE THE QUESTION ASKS FOR NOT TO USE SORTING FUNCTION.
-*/
-class Solution {
-public:
-    int findKthLargest(vector<int>& nums, int k) {
-       sort(nums.begin(),nums.end());
-       return nums[nums.size()-k];
-    }
-};
