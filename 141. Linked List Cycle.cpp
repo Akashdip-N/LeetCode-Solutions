@@ -4,16 +4,19 @@
 /*
     Solution Approach: Floyd's Cycle Detection Algorithm
 
-    Floyd's Cycle Detection Algorithm is a two-pointer approach
-        that uses a slow pointer and a fast pointer
-            to detect cycles in a linked list.
-    The slow pointer moves one step at a time,
-        while the fast pointer moves two steps at a time.
-    If there is a cycle in the linked list,
-        the fast pointer will eventually catch up to the slow pointer.
-
     Time Complexity: O(n)
     Space Complexity: O(1)
+
+    Explanation:
+        - Using two pointers, slow and fast.
+        - Slow pointer moves one step at a time,
+            while fast pointer moves two steps at a time.
+        - If there is a cycle,
+            the fast pointer will eventually meet the slow pointer,
+                we return true.
+        - If the fast pointer reaches the end of the list (nullptr),
+            then there is no cycle,
+                we return false.
 */
 
 class Solution {
@@ -37,17 +40,17 @@ public:
     }
 };
 
-/*****************************************************************/
+/********************** NOT BETTER SPACE COMPLEXITY ***************************/
 /*
     Solution Approach: Hash Table
 
     Time Complexity: O(n)
     Space Complexity: O(n)
 
-    We can use a hash table to keep track of the nodes we have visited.
-    If we encounter a node that is already in the hash table,
-        then we know that there is a cycle in the linked list.
-
+    Explanation:
+        - We can use a hash table to keep track of the nodes we have visited.
+        - If we encounter a node that is already in the hash table,
+            then we know that there is a cycle in the linked list.
 */
 class Solution {
 public:
