@@ -1,19 +1,23 @@
 /*
     https://leetcode.com/problems/maximum-subarray/description/
 */
-/***************** Using Kadane's Algorithm ***************************** */
 /*
-    Time Complexity:- O(n), Space Complexity:- O(1)
+    Solution Approach:- Using Kadane's Algorithm,
 
-    Approach:-
-        * Iterating from the second element to the last element of the array.
-        * Updating the current sum based on greater in value of the,
-            current element
-                or
-            sum of the current element and the previous sum.
-        * Updating the max_sum,
-            based on the maximum of the current sum and the max_sum.
-        * Finally returning the max_sum.
+    Time Complexity:- O(n)
+    Space Complexity:- O(1)
+
+    Explanation:
+        - We maintain two variables, max_sum and current_sum.
+        - max_sum keeps track of the maximum sum found so far.
+        - current_sum keeps track of the sum of the current subarray.
+        - For each element in the array,
+            we update current_sum to be either
+                the current element
+                    or
+                the sum of current_sum and the current element.
+        - We then update max_sum to be the maximum of itself and current_sum.
+        - Finally, we return max_sum as the result.
 */
 /*
     For better understanding:-
