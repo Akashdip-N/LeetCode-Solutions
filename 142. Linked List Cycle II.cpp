@@ -25,7 +25,7 @@ public:
         ListNode* slow = head;
         ListNode* fast = head;
 
-        while (fast != nullptr && fast->next != nullptr) {
+        while (fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;
 
@@ -36,8 +36,47 @@ public:
                     entry = entry->next;
                     slow = slow->next;
                 }
+
                 return entry;
             }
+        }
+
+        return nullptr;
+    }
+};
+
+/************************* USING HASH MAP *************************/
+/*
+    Solution Approach: Using Hash Map
+
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+
+    Explanation:
+        - We can use a hash map to keep track of the nodes we have visited.
+        - If we encounter a node that is already in the hash map,
+            then we know that there is a cycle in the linked list,
+                and we return that node.
+        - If we reach the end of the list (nullptr),
+            then there is no cycle, and we return nullptr.
+*/
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_map<ListNode*, int> visited;
+
+        if (head == nullptr || head->next == nullptr)
+            return nullptr;
+
+        ListNode* current = head;
+
+        while (current) {
+            if (visited.find(current) != visited.end())
+                return current;
+
+            visited[current] = 1;
+            current = current->next;
         }
 
         return nullptr;
