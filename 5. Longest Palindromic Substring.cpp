@@ -1,59 +1,54 @@
 /*
     https://leetcode.com/problems/longest-palindromic-substring/
 */
-
-/*                    LITTLE DIFFICULT PROBLEM!!!!!               */
 /*
-    Ex:- Input = "babad"
-    Output = "bab" or "aba"
+    Solution Approach:- Two pointers
 
+    Time Complexity:- O(n^2)
+    Space Complexity:- O(1)
 
-    Solution Approach:-
-
-    1. We will use a sliding window approach.
-    2. At first we are going to check for the odd length palindrome,
-        i.e., we will take a character as the center and expand the window
-                to the left and right side
-    3. Then we will check for the even length palindrome,
-        i.e., we will take two characters as the center and expand the window
-                to the left and right side
+    Explanation:-
+        - There are two types of palindromes:
+            a. odd-length (single center)
+            b. even-length (two centers).
+        - Odd length palindromes can be expanded from a single center,
+            while even-length palindromes can be expanded from two centers.
+        - For each character in the string,
+            first we expand around it as a single center,
+                then we expand around it and the next character as two centers.
+        - We keep track and store the longest palindrome found during these expansions
+        - Return the longest palindrome found.
 */
 
 class Solution {
 public:
-    string longestPalindrome(string s) {
-        int size = s.size();
-
-        if(size == 0)
-            return "";
-
-        string ret = "";
-        int length = 0;
-
-        for(int i = 0; i < size; i++){
-            int l = i, r = i;
-            // Odd length palindrome
-            while(l >= 0 && r < size && s[l] == s[r]){
-                if(r - l + 1 > length){
-                    length = r - l + 1;
-                    ret = s.substr(l, length);
-                }
-                l--;
-                r++;
-            }
-
-            // Checking if the adjacent characters are same
-            l = i, r = i + 1;
-            while(l >= 0 && r < size && s[l] == s[r]){
-                if(r - l + 1 > length){
-                    length = r - l + 1;
-                    ret = s.substr(l, length);
-                }
-                l--;
-                r++;
-            }
+    string expandAroundCenter(const string& s, int left, int right) {
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            left--;
+            right++;
         }
 
-        return ret;
+        return s.substr(left + 1, right - left - 1);
+    }
+
+    string longestPalindrome(string s) {
+        if (s.empty())
+            return "";
+
+        string longest = "";
+
+        for (int i = 0; i < s.size(); i++) {
+            // Odd length palindrome (single center)
+            string odd = expandAroundCenter(s, i, i);
+            if (odd.size() > longest.size())
+                longest = odd;
+
+            // Even length palindrome (two centers)
+            string even = expandAroundCenter(s, i, i + 1);
+            if (even.size() > longest.size())
+                longest = even;
+        }
+
+        return longest;
     }
 };
