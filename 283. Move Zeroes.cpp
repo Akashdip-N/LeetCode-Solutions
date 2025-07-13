@@ -2,16 +2,16 @@
     https://leetcode.com/problems/move-zeroes/
 */
 /*
-    Two Pointer Solution Approach:-
+    Solution Approach: Using Two Pointers
 
-    To implement this solution:-
+    Time Complexity: O(n)
+    Space Complexity: O(1)
 
-    1. Initalize the left pointer to 0
-    2. Traverse the array
-        a. If the current element is not equal to 0,
-            then swap the current element with the element at the left pointer
-            and increment the left pointer
-
+    Explanation:
+        - Iterate through the entire array.
+        - When a non-zero element is found,
+            swap it with the element at the left pointer.
+        - Increment the left pointer.
 */
 class Solution {
 public:
