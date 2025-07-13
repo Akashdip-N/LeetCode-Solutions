@@ -2,25 +2,17 @@
     https://leetcode.com/problems/search-in-rotated-sorted-array
 */
 /*
-    Binary Search Solution:
+    Solution Approach: Binary Search
 
-    Ex:- nums = [4,5,6,7,0,1,2], target = 0
+    Time Complexity: O(log n)
+    Space Complexity: O(1)
 
-    1. Initialize begin = 0, end = (size of the array) - 1.
-    2. Iterate while begin <= end.
-        a. Calculate mid = begin + (end - begin) / 2.
-        b. If nums[mid] == target, return mid.
-        c. If nums[begin] <= nums[mid], this means that the left half is sorted.
-            i. if the target is in the left half, then will update
-                end = mid - 1.
-            ii. Else, the target is in the right half, so will update
-                begin = mid + 1.
-        d. Will check if the right half is sorted.
-            i. If the target is in the right half, then will update
-                begin = mid + 1.
-            ii. Else, the target is in the left half, so will update
-                end = mid - 1.
-    3. If the target is not found, then will return -1.
+    Explanation:
+        - Comparing the middle element with the target.
+        - If the left half is sorted, check if the target is in that range.
+        - If the right half is sorted, check if the target is in that range.
+        - Adjust the search range accordingly.
+        - Return the index if found, otherwise return -1.
 */
 class Solution {
 public:
