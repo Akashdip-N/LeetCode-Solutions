@@ -1,7 +1,7 @@
 # LeetCode-Solutions
 Welcome to my **LeetCode Solutions Repository**! 🧠✨
 
-This repository contains my personal solutions to various LeetCode problems.
+This repository contains my solutions to various LeetCode problems.
 
 Each solution includes:
 - ✅ Clean and efficient code implementation in C++
@@ -9,7 +9,7 @@ Each solution includes:
 - ⏱️ Time and space complexity analysis
 
 ## 📁 Repository Structure
-The repository is organized by problem based on their numeric ID, which makes it easy to navigate and find specific solutions.
+The repository is organised by problem based on their numeric ID, which makes it easy to navigate and find specific solutions.
 
 
 ## 📌 Problem Format
@@ -37,7 +37,7 @@ Each problem file typically includes:
 ## 🤝 Contributions
 This is a personal learning project, but feel free to fork and explore!
 
-If you have suggestions, feel free to open an issue or pull request.
+If you have any suggestions, please feel free to open an issue or pull request.
 
 ## 📅 Update Frequency
 I try to solve and upload new problems regularly — at least a few each week.
@@ -57,4 +57,4 @@ I try to solve and upload new problems regularly — at least a few each week.
 If you have any questions or want to connect, feel free to reach out via [LinkedIn](https://www.linkedin.com/in/akashdip-neogi/) or open an issue in the repository.
 
 ---
-Happy coding! 🚀
+## Happy coding! 🚀
