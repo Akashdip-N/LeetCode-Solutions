@@ -6,7 +6,14 @@
     Time Complexity: O(n)
     Space Complexity: O(1)
 
-    Taking two pointers prev and next and reversing the links between nodes.
+    Explanation:-
+        - Using two pointers concept to reverse the linked list.
+        - One pointer (current) will traverse the list,
+          while the other pointer (prev) will keep track of the previous node.
+        - The next pointer will store the next node of the current node.
+        - At each step, we reverse the link
+            by pointing the current node's next to the previous node.
+        - Finally, we return the new head of the reversed linked list.
 */
 class Solution {
 public:
@@ -35,6 +42,13 @@ public:
     Time Complexity: O(n)
     Space Complexity: O(1)
 
+    Explanation:-
+        - Using recursion to reverse the linked list.
+        - The base case is when the head is NULL or has no next node.
+        - We recursively call the function for the next node,
+            and then reverse the link
+                by pointing the next node's next to the current node.
+        - Finally, we set the current node's next to NULL to avoid cycles.
 */
 class Solution {
 public:
