@@ -5,8 +5,9 @@
     Solution Approach:- Using Sorting and Two Pointers
 
     Time Complexity: O(N^2)
-    Space Complexity: O(1)
+    Space Complexity: O(K)
     N = number of elements in the array
+    K = number of triplets found
 
     Explanation:
         - First, we sort the array.
