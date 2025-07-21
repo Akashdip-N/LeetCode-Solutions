@@ -2,22 +2,25 @@
     https://leetcode.com/problems/container-with-most-water/
 */
 /*
-    Problem:- We have to find the maximum area of the container formed
-        by the vertical lines of the given heights.
+    Problem:- Using two pointers.
 
-    Explantion:-
-    * We are taking two pointers, left and right.
-    * We are calculating the area between the two pointers.
-    * We are updating the max_area with the maximum of the current area and the max_area.
-    * We are moving the pointer which has the smaller height.
-    * We are returning the max_area.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    n = length of the input array
+
+    Explanation:
+        - We have to find the maximum area that can be formed
+          between two lines represented by the heights in the array.
+        - Using two pointers, `left` and `right`, to find the maximum area.
+        - The area is calculated as the width between the two pointers
+            multiplied by the minimum height of the two lines.
 */
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        int left = 0;
-        int right = height.size() - 1;
+        int left = 0, right = height.size() - 1;
         int max_area = 0;
+
         while(left < right){
             int area = (right-left) * min(height[left], height[right]);
             max_area = max(area, max_area);
@@ -27,6 +30,7 @@ public:
             else
                 right -= 1;
         }
+
         return max_area;
     }
 };
