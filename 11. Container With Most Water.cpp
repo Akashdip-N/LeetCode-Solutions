@@ -9,11 +9,15 @@
     n = length of the input array
 
     Explanation:
-        - We have to find the maximum area that can be formed
-          between two lines represented by the heights in the array.
-        - Using two pointers, `left` and `right`, to find the maximum area.
-        - The area is calculated as the width between the two pointers
-            multiplied by the minimum height of the two lines.
+        - Two pointers are initialized at the start and end of the array.
+        - Run a loop until the two pointers meet.
+        - First calculate the area formed by the two pointers.
+        - Update the maximum area if the current area is larger.
+        - Check if the
+            left pointer's height is less than the right pointer's height,
+                if so, increment the left pointer.
+        - Else decrement the right pointer.
+        - Return the maximum area found.
 */
 class Solution {
 public:
@@ -26,9 +30,9 @@ public:
             max_area = max(area, max_area);
 
             if(height[left] < height[right])
-                left += 1;
+                left++;
             else
-                right -= 1;
+                right--;
         }
 
         return max_area;
