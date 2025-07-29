@@ -2,42 +2,49 @@
     https://leetcode.com/problems/maximum-depth-of-binary-tree/
 */
 /*
-    Time & Space Complexity: O(n) for all the approaches
-*/
-/*
     Solution Approach: Recursive DFS
 
-    * Recursively; Calculating and returning the maximum depth using DFS,
-*/
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    n = number of nodes in the tree
 
+    Explanation:
+        - Traversing the whole tree recursively.
+        - If the node is null, that it's the end of the path,
+            hence returning 0.
+        - Otherwise, returning the maximum depth of the left and right subtrees
+            plus one for the current node.
+*/
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if(root == NULL)
-            return 0;
+        if(root == NULL) return 0;
+
         return max(maxDepth(root->left), maxDepth(root->right)) + 1;
     }
 };
 
-/***********************************************************************/
+/****************************************************************************************/
 /*
-    Solution Approach: Using BFS (using queue)
+    Solution Approach: Iterative BFS, using queue
 
-    * Keeping a depth variable to track the depth of the tree.
-    * Storing the nodes of each level in a queue.
-    * Iterating through each level and updating the depth.
-    * Returning the final depth.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    n = number of nodes in the tree
+
+    Explanation:
+        - Using a queue to perform level order traversal.
+        - Each time we process a level, we increment the depth.
+        - If the node has left or right children, we add them to the queue.
+        - The process continues until all levels are processed.
 */
-
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if(root == NULL)
-            return 0;
+        if(root == NULL) return 0;
 
         queue<TreeNode*> q;
         q.push(root);
-
         int depth = 0;
 
         while(!q.empty()) {
@@ -47,11 +54,8 @@ public:
                 TreeNode* node = q.front();
                 q.pop();
 
-                if(node->left)
-                    q.push(node->left);
-
-                if(node->right)
-                    q.push(node->right);
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
             }
 
             depth++;
@@ -61,25 +65,31 @@ public:
     }
 };
 
-/***********************************************************************/
+/****************************************************************************************/
 /*
     Solution Approach: Iterative DFS, using stack
 
-    * Using stack to store the node and its depth.
-    * Iterating through each level and updating the depth.
-    * Comparing and storing the maximum depth.
-    * Returning the final depth.
-*/
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    n = number of nodes in the tree
 
+    Explanation:
+        - Using a stack to perform depth-first traversal.
+        - Each time we visit a node, we push it onto the stack with
+                its current depth.
+        - If the node is null, we skip it.
+        - Otherwise, we update the maximum depth found so far.
+        - We push the left and right children onto the stack with an
+            incremented depth.
+        - The process continues until the stack is empty.
+*/
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if(root == NULL)
-            return 0;
+        if(root == NULL) return 0;
 
         stack<pair<TreeNode*, int>> st;
         st.push({root, 1});
-
         int depth = 0;
 
         while(!st.empty()) {
@@ -88,11 +98,8 @@ public:
 
             depth = max(depth, d);
 
-            if(node->left)
-                st.push({node->left, d + 1});
-
-            if(node->right)
-                st.push({node->right, d + 1});
+            if(node->left) st.push({node->left, d + 1});
+            if(node->right) st.push({node->right, d + 1});
         }
 
         return depth;
