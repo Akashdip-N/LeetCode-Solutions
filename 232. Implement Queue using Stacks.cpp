@@ -1,21 +1,22 @@
 /*
-    https://leetcode.com/problems/implement-queue-using-stacks/description/
-
-    Explanation:-
-    * We have constaraint that we can use only stack.
-    * The time complexity of push is O(1) and pop is O(n) in worst case.
-
-    What we are doing is:-
-    * Pushing values to stack s1.
-    * While popping, we are checking if stack s2 is empty or not,
-        if and only if s2 is empty, we are pushing all the elements of s1 to s2.
-    * For peek operation, we are checking trying to find the top element of s2.
-    * For the empty case, if both the stacks are empty,
-        then only we can say that the queue is empty,
-            else there are elements in the queue.
+    https://leetcode.com/problems/implement-queue-using-stacks
 */
+/*
+    Solution Approach:- Using two stacks
 
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    n = number of elements in the queue
 
+    Explanation:
+        - Using two stacks, we can simulate the behavior of a queue.
+        - The first stack (s1) is used to push elements.
+        - The second stack (s2) is used to pop elements in the correct order.
+        - When popping an element, if s2 is empty, we transfer all elements from
+            stack (s1) to stack (s2) to reverse their order.
+        - The peek operation checks the top of s2, transferring elements if necessary.
+        - The empty operation checks if both stacks are empty.
+*/
 class MyQueue {
     stack<int> s1;
     stack<int> s2;
