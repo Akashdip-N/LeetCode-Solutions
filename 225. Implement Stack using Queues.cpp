@@ -1,57 +1,53 @@
 /*
-    https://leetcode.com/problems/implement-stack-using-queues/description/
+    https://leetcode.com/problems/implement-stack-using-queues
+*/
+/*
+    Solution Approach:- Using two queues
 
-    Explanation:-
-    * We have constaraint that we can use only stack.
-    * The time complexity of push is O(1) and pop is O(n) in worst case.
+    Time Comeplexity: O(n)
+    Space Complexity: O(n)
+    n = number of elements in the stack
 
-    What we are doing is:-
-    * Pushing values to queue q1.
-    * Since, our main queue is q1,
-        we will check if q1 is empty, then we will push the value to q1.
-    * Making sure, both the queses are the same by using the swap() function.
-    * For the pop operation, we will pop the front element from q1.
-    * For the top operation, we will return the front element from q1.
-    * Empty operation will return true if q1 is empty.
+    Explanation:
+        - Using two queues, to simulate stack behavior.
+        - When a new element is pushed into the stack,
+            it should appear at the front of the queue,
+                so we first push the new element into the second queue,
+                    then we move all elements from the first queue to the second queue.
+        - When popping an element, we simply pop from the first queue.
+        - The top element can be accessed directly from the first queue.
+        - The empty function checks if the first queue is empty.
 */
 class MyStack {
-private:
-    queue<int >q1;
-    queue<int >q2;
-public:
-    MyStack() {
+    private:
+        queue<int> q1;
+        queue<int> q2;
 
-    }
+    public:
+        MyStack() {}
 
-    void push(int x) {
-        q2.push(x);
-        while(!q1.empty()){
-            q2.push(q1.front());
-            q1.pop();
+        void push(int x) {
+            q2.push(x);
+
+            while(!q1.empty()) {
+                q2.push(q1.front());
+                q1.pop();
+            }
+
+            swap(q1,q2);
         }
-        swap(q1,q2);
-    }
 
-    int pop() {
-       int x =  top();
-       q1.pop();
-       return x;
-    }
+        int pop() {
+            int x =  top();
+            q1.pop();
+                return x;
+        }
 
-    int top() {
-        return q1.front();
-    }
+        int top() {
+            return q1.front();
+        }
 
-    bool empty() {
-        return q1.empty();
-    }
+        bool empty() {
+            return q1.empty();
+        }
 };
-
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack* obj = new MyStack();
- * obj->push(x);
- * int param_2 = obj->pop();
- * int param_3 = obj->top();
- * bool param_4 = obj->empty();
- */
