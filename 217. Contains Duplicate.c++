@@ -2,24 +2,26 @@
     https://leetcode.com/problems/contains-duplicate/
 */
 /*
-    Sorting Solution Approach:-
+    Solution Approach:- Using Sorting
 
-    To implement this solution:-
-    1. Sort the array
-    2. Initialize a variable num with the first element of the array
-    3. Traverse the array from the second element
-        a. If the current element is equal to num,
-            then return true
-        b. Update num with the current element
-    4. Return false
+    Time Complexity: O(nlogn)
+    Space Complexity: O(1)
+
+    Explanation:-
+        i. Sort the array
+        ii. Traverse the array and
+            check if the current element is equal to the previous element.
+        iii. If yes, return true.
+        iv. If no, continue traversing the array.
+        v. If no duplicates are found, return false.
 */
 class Solution {
 public:
-    bool containsDuplicate(vector<int>& nums) {          // Space Complexity: O(1)
-        sort(nums.begin(), nums.end());                  // O(nlogn)
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
         int num = nums[0];
 
-        for (int i = 1; i < nums.size(); i++){          // O(n)
+        for (int i = 1; i < nums.size(); i++){
             if (num == nums[i])
                 return true;
             num = nums[i];
@@ -28,27 +30,30 @@ public:
         return false;
     }
 };
-
+/************************************************************************************/
 /*
-    Set Solution Approach:-
+    Solution Approach:- Using Hashmap
 
-    To implement this solution:-
-    1. Initialize an unordered_set<int> s
-    2. Traverse the array
-        a. If the element is already present in the set,
-            then return true
-        b. Else, add the element to the set
-    3. Return false
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+
+    Explanation:-
+        i. Create an unordered map to store the elements of the array.
+        ii. Traverse the array and
+            check if the current element is already present in the map.
+        iii. If yes, return true.
+        iv. If no, insert the element in the map.
+        v. If no duplicates are found, return false.
 */
-class Solution {                                        // Space Complexity: O(n)
+class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        unordered_set<int> s;
+        unordered_map<int, bool>m;
 
-        for (auto num : nums){                          // O(n)
-            if (s.find(num) != s.end())                 // O(1)
+        for(int num : nums){
+            if(m[num])
                 return true;
-            s.insert(num);
+            m[num] = true;
         }
 
         return false;
