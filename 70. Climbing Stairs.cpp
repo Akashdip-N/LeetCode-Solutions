@@ -1,28 +1,19 @@
 /*
     https://leetcode.com/problems/climbing-stairs/
 */
-/***************************** Memoization approach ******************************/
 /*
-    Solution:-
-    * We are calling the function and storing the result in a map
-        to avoid redundant calculations.
-    * Then we are backtracking the function calls to get the final result.
+    Solution Approach: Top Down Approach with Memoization
 
-    Ex:-
-    n = 3
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    n = number of stairs
 
-    First run:-
-    memo[3] = countStairs(2, memo) + countStairs(1, memo);
-    memo[2] = countStairs(1, memo) + countStairs(0, memo);
-    memo[1] = countStairs(0, memo) + countStairs(-1, memo);
-
-    Now we will backtrack the function calls to get the final result.
-
-    memo[1] = 1
-    memo[2] = memo[1] + 1 = 2
-    memo[3] = memo[2] + memo[1] = 3
-
-    So the final result is memo[3] = 3.
+    Explanation:
+        i. Using a helper function to count the number of ways to reach the nth stair.
+        ii. Base case: if n is 0 or 1, return 1.
+        iii. If the result is already in the memo map, return it.
+        iv. Otherwise, calculate the result by calling the helper function for n-1 and n-2.
+        v. Store the result in the memo map and return it.
 */
 
 class Solution {
@@ -44,30 +35,28 @@ public:
     }
 };
 
-/****************** TOP DOWN APPROACH ***********************/
+/**********************************************************************************************/
 /*
-    Solution:-
+    Solution Approach: Bottom Up Approach with Tabulation
 
-    Since the result will be sum of the previous two results.
-    We can use dynamic programming to solve this problem.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    n = number of stairs
 
-    Ex:-
-    n = 3,
-
-    To go to the 3rd step, there are two ways:
-    1. 1 + 1 + 1
-    2. 1 + 2
-
-    So, there are two methods to reach the 3rd step.
-
-
+    Explanation:
+        i. Using three variables to store the number of ways to reach the current stair,
+           the previous stair, and the stair before the previous stair.
+        ii. Initialize all three variables to 1.
+        iii. Iterate from 0 to n-1, updating the variables accordingly.
+        iv. Finally, return the variable that stores the number of ways to reach the nth stair.
 */
+
 class Solution {
 public:
     int climbStairs(int n) {
-
         int a = 1, b = 1, c = 1;
-        for(int i = 0; i < (n-1); i++){
+
+        for(int i = 0; i < (n-1); i++) {
             c = a;
             a += b;
             b = c;
