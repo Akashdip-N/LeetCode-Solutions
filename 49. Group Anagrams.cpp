@@ -2,46 +2,13 @@
     https://leetcode.com/problems/group-anagrams/
 */
 /*
-    Solution Approach:- Using sorting
+    Solution Approach:- Using Count Array
 
-    Time Complexity: O(N * K log K)
-    Space Complexity: O(N * K)
+    Time Complexity: O(N * k)
+    Space Complexity: O(N * k)
 
-    n = number of strings
-    k = maximum length of the string we are considering
-
-    Explanation:
-        - Iterating through each string in the input list,
-            we sort the characters of the string to create a key.
-*/
-class Solution {
-public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        vector<vector<string>> ans;
-        unordered_map<string, vector<string>> mp;
-
-        for(auto str : strs){
-            string key = str;
-            sort(key.begin(), key.end());
-            mp[key].push_back(str);
-        }
-
-        for(auto i : mp)
-            ans.push_back(i.second);
-
-        return ans;
-    }
-};
-
-/******************************************************************************/
-/*
-    Solution Approach:- Using Count Array & Hash Map
-
-    Time Complexity: O(N * K)
-    Space Complexity: O(N * K)
-
-    n = number of strings
-    k = maximum length of the string we are considering
+    N = number of strings in the input list
+    k = lenght of the string we are currently working
 
     Explanation:
         - For each string, we create a key based on the frequency of each character.
@@ -54,11 +21,11 @@ public:
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        vector<vector<string>> ans;
         unordered_map<string, vector<string>> mp;
 
-        for(auto str : strs){
+        for(auto str : strs) {
             string key = "";
+
             vector<int> count(26, 0);
             for(char c : str)
                 count[c - 'a']++;
@@ -69,6 +36,43 @@ public:
             mp[key].push_back(str);
         }
 
+        vector<vector<string>> ans;
+        for(auto i : mp)
+            ans.push_back(i.second);
+
+        return ans;
+    }
+};
+
+/**************************************************************************************/
+/*
+    Solution Approach:- Using sorting
+
+    Time Complexity: O(N * k log k)
+    Space Complexity: O(N * k)
+
+    N = number of strings in the input list
+    k = lenght of the string we are currently working
+
+    Explanation:
+        - For each string in the input list, we sort the string to create a key.
+        - Storing the string based on the sorted key in a hash map.
+        - Pushing the map second value,
+            i.e. the vector of strings to the answer vector.
+        - Finally returning the answer vector.
+*/
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> mp;
+
+        for(auto str : strs) {
+            string key = str;
+            sort(key.begin(), key.end());
+            mp[key].push_back(str);
+        }
+
+        vector<vector<string>> ans;
         for(auto i : mp)
             ans.push_back(i.second);
 
