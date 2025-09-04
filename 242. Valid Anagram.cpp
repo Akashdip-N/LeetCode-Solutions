@@ -4,21 +4,19 @@
 /*
     Solution Approach:- Using Hash Map
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = length of the first string (s)
 
     Explanation:
-        - First storing all the characters of string s
-            in a hash map with their counts.
-        - Iterating through each character in string t:
-            - If the character exists in the map, we decrement its count.
-            - If the count reaches zero, we remove that character from the map,
-                because the number of occurrences of that character in t matches with s.
-            - If we find any character in t that does not exist in the map,
-                we return false.
-        - After the loop gets completed, we return true,
-            indicating that both strings are anagrams of each other.
+        - Storing all the characters of the first string in a hash map.
+        - Iterating through each character of the second string,
+            and checking if it is present in the hash map.
+        - If present, decrementing its count in the hash map.
+        - If the count becomes zero, removing the character from the hash map.
+        - Finally, if the hash map is empty, returning true, else false.
 */
+
 class Solution {
 public:
     bool isAnagram(string s, string t) {
@@ -30,9 +28,10 @@ public:
         for(auto i : s)
             mp[i]++;
 
-        for(auto i : t){
+        for(auto i : t) {
             if(mp.find(i) == mp.end())
                 return false;
+
             mp[i]--;
             if(mp[i] == 0)
                 mp.erase(i);
@@ -42,17 +41,20 @@ public:
     }
 };
 
-/**************************************************************************/
+/***********************************************************************************/
 /*
     Solution Approach:- Using Sorting
 
-    Time Complexity: O(n log n)
+    Time Complexity: O(N log N)
     Space Complexity: O(1)
+    N = length of the first string (s)
 
     Explanation:
-        - First we sort both strings s and t.
-        - If the sorted strings are equal, then they are anagrams of each other.
+        - Base case, if the size of the strings are not equal.
+        - Sorting both the strings.
+        - Compare the two sorted strings, and return the result.
 */
+
 class Solution {
 public:
     bool isAnagram(string s, string t) {
