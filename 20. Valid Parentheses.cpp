@@ -1,19 +1,23 @@
 /*
     https://leetcode.com/problems/valid-parentheses/
+*/
+/*
+    Solution Approach: Using Stack
 
-    Problem:- We have to check if the stack is empty at the end or not.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    n = length of the string
 
-    Explantion:-
-    * When we are encountering a opening bracket we are pushing it into the stack.
-    * When we are encountering a closing bracket,
-        we are checking if the stack is empty or not.
-            If it is empty, which means that the order of brackets are wrong,
-                then we are returning false
-        Else,
-            we are poping the bracket from the stack.
-    * We are returing the whether the stack is empty or not.
-        If it is empty, then the order of brackets are correct.
-        Else, the order of brackets are wrong.
+    Explanation:-
+        * Stack to keep track of opening brackets.
+        * Iterate through each character in the string.
+        * If it's an opening bracket, push it onto the stack.
+        * If it's a closing bracket,
+            check if it is the first character or the stack is empty
+                or it is not matching with the top of the stack.
+                    then return false
+        * Else continue popping the top of the stack.
+        * Finally, if the stack is empty, return true, else false.
 */
 
 class Solution {
@@ -23,23 +27,21 @@ public:
         for(int i = 0; i < s.length(); i++) {
             if(s[i] == '(' || s[i] == '[' || s[i] == '{')
                 t.push(s[i]);
-            else
-                if(s[i] == ')') {
-                    if(i == 0 ||  t.empty() || t.top() != '(')
+            else if(s[i] == ')') {
+                if(i == 0 ||  t.empty() || t.top() != '(')
                         return false;
                 t.pop();
-            } else
-                if(s[i] == ']') {
-                    if(i == 0 || t.empty() || t.top() != '[')
-                        return false;
+            } else if(s[i] == ']') {
+                if(i == 0 || t.empty() || t.top() != '[')
+                    return false;
                 t.pop();
-            } else
-                if(s[i] == '}') {
-                    if(i == 0 || t.empty() || t.top() != '{')
-                        return false;
+            } else if(s[i] == '}') {
+                if(i == 0 || t.empty() || t.top() != '{')
+                    return false;
                 t.pop();
             }
         }
+
         return t.empty();
     }
 };
