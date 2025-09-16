@@ -13,7 +13,7 @@
     Explanation:
         - For each string, we create a key based on the frequency of each character.
         - We use a vector of size 26 to count the occurrences of
-            each character (assuming lowercase English letters).
+            each character in the string, since the characters are in lowercase.
         - The key is formed by concatenating the counts
             of each character, separated by a delimiter.
         - We then use this key to group anagrams together in a hash map.
