@@ -10,19 +10,14 @@
     K = number of triplets found
 
     Explanation:
-        - First, we sort the array.
-        - Then, we iterate through the array and for each element.
-        - We use two pointers, one starting from the next element
-            and the other starting from the end of the array.
-        - We check the sum of the three elements.
-            - If the sum is zero,
-                we add the triplet to the result.
-            - If the sum is less than zero,
-                we move the left pointer to one step to the right.
-            - If the sum is greater than zero,
-                we move the right pointer to one step to the left.
-        - We also handle duplicates to avoid adding the same triplet multiple times.
-        - Finally, we return the result.
+        - Sort the array
+        - Store one element and find the other two elements using two pointers.
+        - Move the left pointer to one step right if the sum is less than zero.
+        - Move the right pointer to one step left if the sum is greater than zero.
+        - If the sum is equal to zero, store the triplet and move both pointers to
+            avoid duplicates.
+        - Repeat the process for all elements in the array.
+        - Return the result vector.
 */
 
 class Solution {
