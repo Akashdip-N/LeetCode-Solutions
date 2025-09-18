@@ -2,22 +2,25 @@
     https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 */
 /*
-    Solution Approach:- Two Pointer with Binary Search
-
     Time Complexity:- O(n)
     Space Complexity:- O(1)
-    n = size of the input array
+
+    -------------------------------------------------------------------------
+    Ex:- numbers = [2,7,11,15], target = 9
+    Output:- [1,2]
 
     Solution:-
-        i. Initialize two pointers, left and right, to the start and end of the array.
-        ii. While left is less than right:
-            a. Calculate the sum of the elements at the left and right pointers.
-            b. If the sum equals the target, return the indices (left + 1, right + 1).
-            c. If the sum is less than the target,
-                increment the left pointer to increase the sum.
-            d. If the sum is greater than the target,
-                decrement the right pointer to decrease the sum.
-        iii. If no such pair is found, return an empty vector.
+    1. We are taking two pointers, left and right.
+    2. Assigninining left = 0 and right = numbers.size()-1.
+    3. Calculating the sum of the elements at the left and right pointers.
+    4. If the sum is equal to the target,
+        we are returning the indices of the elements.
+    5. If the sum is less than the target,
+        that means we need bigger elements,
+            so we are incrementing the left pointer.
+    6. If the sum is greater than the target,
+        that means we need smaller elements,
+            so we are decrementing the right pointer.
 */
 class Solution {
 public:
