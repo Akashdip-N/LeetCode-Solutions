@@ -24,20 +24,20 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
+        int size = nums.size();
 
         vector<vector<int>> res;
         vector<int> temp;
 
-        for(int i = 0; i < nums.size(); i++) {
+        for(int i = 0; i < size; i++) {
             if (nums[i] > 0)
                 break;
             else
                 if (i > 0 && (nums[i] == nums[i-1]))
                     continue;
 
-            int l = i + 1, r = nums.size() - 1;
+            int l = i + 1, r = size - 1;
 
-            // Searching the whole array for the triplet
             while(l < r) {
                 int sum = nums[i] + nums[l] + nums[r];
 
@@ -51,7 +51,6 @@ public:
                     l++;
                     r--;
 
-                    // To avoid duplicates
                     while (l < r) {
                         if (nums[l] == nums[l-1])
                             l++;
