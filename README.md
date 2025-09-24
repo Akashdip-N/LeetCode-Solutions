@@ -4,7 +4,7 @@ Welcome to my **LeetCode Solutions Repository**! 🧠✨
 This repository contains my solutions to various LeetCode problems.
 
 Each solution includes:
-- ✅ Clean and efficient code implementation in C++
+- ✅ Clean and efficient code implementation in C++, MySQL
 - 🧩 Clear explanation of the approach
 - ⏱️ Time and space complexity analysis
 
@@ -22,6 +22,7 @@ Each problem file typically includes:
 
 ## 🛠 Languages Used
 - C++ (primary)
+- MySQL (Database)
 - May include other languages in the future
 
 ## 🚀 Goals
@@ -51,6 +52,7 @@ I try to solve and upload new problems regularly — at least a few each week.
 - Backtracking
 - Sliding Window
 - Binary Search
+- Database
 - And more..
 
 ## 📫 Contact
