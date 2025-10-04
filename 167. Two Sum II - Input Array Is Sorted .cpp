@@ -4,9 +4,9 @@
 /*
     Solution Approach:- Two Pointer with Binary Search
 
-    Time Complexity:- O(n)
+    Time Complexity:- O(N)
     Space Complexity:- O(1)
-    n = size of the input array
+    N = size of the input array
 
     Solution:-
         i. Initialize two pointers, left and right, to the start and end of the array.
@@ -28,7 +28,7 @@ public:
         while(left < right){
             int sum = numbers[left] + numbers[right];
             if(sum == target)
-                return {left+1, right+1};
+                return {left + 1, right + 1};
             else
                 if(sum < target)
                     left += 1;
