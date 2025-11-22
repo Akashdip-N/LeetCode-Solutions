@@ -1,7 +1,6 @@
 /*
     https://leetcode.com/problems/find-the-duplicate-number
 */
-/************* Little complicated in understanding the solution *************/
 /*
     Problem explanation:-
 
