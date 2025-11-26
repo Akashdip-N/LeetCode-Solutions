@@ -2,25 +2,25 @@
     https://leetcode.com/problems/min-stack/
 */
 /*
+    Solution Approach:- Using Two Stacks
+
     Time Complexity: O(1)       # Code requirements
-    Space Complexity: O(n)
+    Space Complexity: O(N)
+    N = Number of elements in the stack
 
-    Solution Approach:
-
-    * Using Two Stacks
-    * Since, we there is no way to access the minimum value
-        in the stack, we need to keep track of the minimum value
-        present in the stack.
-    * push() function, inserts the value into the stack,
-        AND if there are no elements present in the minStack,
-            or the value to be inserted is less than or
-                equal to the top of minStack.
-    * pop() function, removes a value from the stack,
-        AND if the value to be popped is equal to the top of minStack,
-            pop the top element from minStack.
-    * top() function, returns the top element of the stack.
-    * getMin() function, returns the minimum element of the stack,
-        using the minStack.
+    Explanation:
+        * We use two stacks,
+            one to store the actual data and
+                another to store the minimum elements.
+        * When pushing an element,
+            we check if it's smaller than or equal to the current minimum (top of minStack).
+                If yes, we push it onto minStack as well.
+        * When popping an element,
+            we check if it's equal to the current minimum.
+                If yes, we pop it from minStack as well.
+        * The top() function returns the top element of the data stack.
+        * The getMin() function returns the top element of the minStack,
+            which is the minimum element in the data stack.
 */
 class MinStack {
     private:
@@ -52,12 +52,3 @@ public:
         return minStack.top();
     }
 };
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack* obj = new MinStack();
- * obj->push(val);
- * obj->pop();
- * int param_3 = obj->top();
- * int param_4 = obj->getMin();
- */
