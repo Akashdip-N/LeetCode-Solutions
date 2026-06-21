@@ -4,16 +4,17 @@
 /*
     Solution Approach: Top Down Approach with Memoization
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    n = number of stairs
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = number of stairs
 
     Explanation:
-        i. Using a helper function to count the number of ways to reach the nth stair.
-        ii. Base case: if n is 0 or 1, return 1.
-        iii. If the result is already in the memo map, return it.
-        iv. Otherwise, calculate the result by calling the helper function for n-1 and n-2.
-        v. Store the result in the memo map and return it.
+        i. Start from the nth stair and recursively calculate the number of ways to
+            reach the top by taking either 1 or 2 steps.
+        ii. Using the base cases where if n is 0 or 1, there is only one way to reach the top.
+        iii. Use a map to store the results of previously calculated stairs
+            to avoid redundant calculations.
+        iv. Finally, return the number of ways to reach the nth stair.
 */
 
 class Solution {
@@ -39,9 +40,9 @@ public:
 /*
     Solution Approach: Bottom Up Approach with Tabulation
 
-    Time Complexity: O(n)
+    Time Complexity: O(N)
     Space Complexity: O(1)
-    n = number of stairs
+    N = number of stairs
 
     Explanation:
         i. Using three variables to store the number of ways to reach the current stair,
