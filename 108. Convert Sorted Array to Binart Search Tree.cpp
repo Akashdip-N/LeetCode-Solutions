@@ -2,27 +2,18 @@
     https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 */
 /*
-    The question asks for, balanced binary tree,
-        which means both the right & left side of the node should have values in it.
+    Solution Approach: Recursive DFS, passing current level by value
 
-    Ex:-
-        nums = [-10,-3,0,5,9]
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = number of nodes in the tree
 
-        The binary tree will be,
-
-                    0
-                   / \
-                 -3   5
-                 /   /
-               -10  9
-
-        The head is the mid element of the array, and
-            the left and right child are the mid elements of the left and right
-                subarray respectively.
-
-    -----------------------------------------------------------------------------
-    * Helper function to pass the values, the left and right index of the array.
-    * Storing the left & right values of the array on the left & rightside of the mid element.
+    Explanation:
+        - Input array is sorted in ascending order,
+            so the middle element of the array will be the root of the BST.
+        - The left half of the array will be the left subtree,
+            and the right half of the array will be the right subtree.
+        - Recursively repeat the process for the left and right halves of the array.
 */
 class Solution {
 public:
