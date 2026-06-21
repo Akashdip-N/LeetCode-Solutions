@@ -2,6 +2,45 @@
     https://leetcode.com/problems/maximum-depth-of-binary-tree/
 */
 /*
+    Solution Approach: Recursive DFS, passing current level by value
+
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = number of nodes in the tree
+
+    Explanation:
+        - Using a helper function to traverse the tree recursively.
+        - The current level is passed by value, so each recursive call
+            has its own copy of the current level.
+        - The maximum depth found so far is updated if the current level
+            exceeds it.
+        - The function continues to traverse the left and right subtrees,
+            incrementing the current level by 1 for each recursive call.
+*/
+class Solution {
+public:
+    void depth(TreeNode* node, int currentLevel, int& maxDeep) {
+        if (!node) return;
+
+        // Update the maximum depth found so far
+        if (currentLevel > maxDeep)
+            maxDeep = currentLevel;
+
+        // Pass the next level down (by value, not by reference)
+        depth(node->left, currentLevel + 1, maxDeep);
+        depth(node->right, currentLevel + 1, maxDeep);
+    }
+
+    int maxDepth(TreeNode* root) {
+        int dep = 0;
+        depth(root, 1, dep);
+
+        return dep;
+    }
+};
+
+/****************************************************************************************/
+/*
     Solution Approach: Recursive DFS
 
     Time Complexity: O(n)
@@ -18,9 +57,14 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if(root == NULL) return 0;
+        if(root == nullptr) return 0;
 
-        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+        // Get the depth of both subtrees
+        int leftDepth = maxDepth(root->left);
+        int rightDepth = maxDepth(root->right);
+
+        // The depth of the current node is 1 plus the deeper of its two children
+        return 1 + max(leftDepth, rightDepth);
     }
 };
 
