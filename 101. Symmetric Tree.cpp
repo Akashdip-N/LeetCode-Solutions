@@ -4,7 +4,6 @@
 /*
     Solution Approach: Recursive Method using DFS
 
-    Space Complexity: O(h)
     Time Complexity: O(N)
     Space Complexity: O(H)
     N = number of nodes in the tree
