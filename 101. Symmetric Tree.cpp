@@ -2,12 +2,13 @@
     https://leetcode.com/problems/symmetric-tree/
 */
 /*
-    Solution Approach: Recursive Method
+    Solution Approach: Recursive Method using DFS
 
-    Time Complexity: O(n)
     Space Complexity: O(h)
-    n = number of nodes in the tree
-    h = height of the tree
+    Time Complexity: O(N)
+    Space Complexity: O(H)
+    N = number of nodes in the tree
+    H = height of the tree
 
     Explanation:
         - Using a helper function to check if the left and right subtrees are symmetric.
@@ -21,20 +22,18 @@
 */
 class Solution {
 public:
-    bool checkChildNodes(TreeNode* left, TreeNode* right){
-        if(left == NULL && right == NULL) return true;
-        if(left == NULL || right == NULL) return false;
+    bool checkChildNodes(TreeNode* nodeL, TreeNode* nodeR){
+        if(!nodeL && !nodeR) return true;
+        if(!nodeL || !nodeR) return false;
 
-        if(left->val != right->val) return false;
+        if(nodeL->val != nodeR->val) return false;
 
         return
-            checkChildNodes(left->left, right->right) &&
-            checkChildNodes(left->right, right->left);
+            checkChildNodes(nodeL->left, nodeR->right) &&
+            checkChildNodes(nodeL->right, nodeR->left);
     }
 
     bool isSymmetric(TreeNode* root) {
-        if(root->left == NULL && root->right == NULL)
-            return true;
         return checkChildNodes(root->left, root->right);
     }
 };
@@ -43,9 +42,10 @@ public:
 /*
     Solution Approach: Iterative Method using Queue
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    n = number of nodes in the tree
+    Time Complexity: O(N)
+    Space Complexity: O(H)
+    N = number of nodes in the tree
+    H = height of the tree
 
     Explanation:
         - We use a queue to perform a level-order traversal of the tree.
