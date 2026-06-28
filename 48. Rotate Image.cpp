@@ -9,10 +9,6 @@
     N = number of rows or columns in the matrix
 
     Explanation:-
-        * Using the linear algebra formula of,
-
-            A * A^T = 1/A
-
         * We have to rotate the matrix by 90 degrees clockwise.
         * To achieve this, we can first transpose the matrix and then reverse each row.
         * Transposing the matrix means converting rows to columns and columns to rows.
