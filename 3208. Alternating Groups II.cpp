@@ -9,14 +9,10 @@
     N = length of colors
 
     Explanation:
-        i. Using two pointers to represent the sliding window.
-        ii. Iterate through the colors array,
-            checking if the current color is the same as the previous color,
-                if they are the same, move the left pointer to the right.
-        iv. If the size of the window is greater than k,
-            move the left pointer to the right.
-        v. If the size of the window is equal to k, increment the count.
-        vi. Finally, return the count.
+        i. (THIS PROBLEM IS THE CONTINUTATION OF THE PREVIOUS PROBLEM "Alternating Groups I")
+            https://leetcode.com/problems/alternating-groups-i
+        ii. The only difference is that the size of the window is not fixed to 3,
+            but it can be any value of k.
 */
 class Solution {
 public:
