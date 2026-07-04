@@ -2,11 +2,11 @@
     https://leetcode.com/problems/two-sum/
 */
 /*
-    Solution Approach:- Using Hash Map
+    Solution Approach:- Sliding Window Approach
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    n = size of the input array
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = size of the input array
 
     Explanation:-
         i. Create an unordered map to store the elements and their indices.
