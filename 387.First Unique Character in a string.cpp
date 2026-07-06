@@ -5,7 +5,7 @@
     Solution Approach: HashMap (Using vector as HashMap)
 
     Time Complexity: O(N)
-    Space Complexity: O(N)
+    Space Complexity: O(1) (Because the vector size is fixed at 27)
     N = length of the string
 
     Explanation:-
@@ -32,7 +32,7 @@ public:
     Solution Approach: HashMap
 
     Time Complexity: O(N)
-    Space Complexity: O(N)
+    Space Complexity: O(1) (Because the unordered_map size is fixed at 27)
     N = length of the string
 
     Explanation:-
