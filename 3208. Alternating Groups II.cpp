@@ -22,15 +22,12 @@ public:
         int count = 0;
 
         for (int right = 1; right < size + k - 1; right++) {
-            // Current color is the same as the previous color
             if(colors[right % size] == colors[(right - 1) % size])
                 left = right;
 
-            // Size of the window is greater than k, move the left pointer to the right
             if((right - left + 1) > k)
                 left++;
 
-            // Size of the window is equal to k, increment the count
             if((right - left + 1) == k)
                 count++;
         }
