@@ -26,7 +26,7 @@
         * If the length of the window is equal to 3,
             we will increment the count of the pairs.
         * Finally, we will return the count of the pairs
- */
+*/
 class Solution {
 public:
     int numberOfAlternatingGroups(vector<int>& colors) {
