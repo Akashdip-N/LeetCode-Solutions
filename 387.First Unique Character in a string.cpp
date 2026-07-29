@@ -8,32 +8,43 @@
     Space Complexity: O(1) (Because the vector size is fixed at 27)
     N = length of the string
 
+    Intuition:-
+        * Counting the frequency of each character in the string.
+        * Iterating over each character of the string,
+            and returning the index of the first character with frequency 1.
+
     Explanation:-
-        * Since vectors have fixed position, where the elements are stored in the memory.
-        * The lookup time to find the frequency of a character is faster than unordered_map.
+        * Creating a fixed size vector of 27
+        * Incrementing the frequency of each character in the vector.
+        * Iterating over each character of the string,
+            and if the frequency of the character is 1,
+                return the index of that character.
+        * If no unique character is found, return -1.
 */
 class Solution {
 public:
-    long long firstUniqChar(string s) {
-        vector<int> mp(27,0);
-        for(char c:s)
-            mp[c-'a']++;
+    int firstUniqChar(string s) {
+        vector<int> mp(27, 0);
 
-        for(int i=0;i<s.length();i++)
-            if(mp[s[i]-'a']==1)
+        for(char c:s)
+            mp[c - 'a']++;
+
+        for(int i = 0; i < s.length(); i++)
+            if(mp[s[i] - 'a'] == 1)
                 return i;
 
         return -1;
     }
 };
 
-/*************************************************************************************************/
+/*********************************************************************************/
 /*
     Solution Approach: HashMap
 
     Time Complexity: O(N)
-    Space Complexity: O(1) (Because the unordered_map size is fixed at 27)
+    Space Complexity: O(n)
     N = length of the string
+    n = number of unique characters in the string
 
     Explanation:-
         * Using HashMap to store the frequency of each character in the string.
