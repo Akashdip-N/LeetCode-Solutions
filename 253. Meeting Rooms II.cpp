@@ -5,7 +5,7 @@
 /*
     Solution Approach: Using Priority Queue (Min Heap)
 
-    Time Complexity: O(N * logN) (because of sorting)
+    Time Complexity: O(NlogN) (because of sorting)
     Space Complexity: O(N)
     N = number of intervals
 
