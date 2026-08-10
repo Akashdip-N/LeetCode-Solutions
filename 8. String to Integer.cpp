@@ -2,53 +2,57 @@
     https://leetcode.com/problems/string-to-integer-atoi/
 */
 /*
-    Solution Approach:-
+    Solution Approach:- Using String Manipulation
 
-    1. We will try to avoid the white spaces at the beginning.
-    2. We will check for the sign of the number.
-    3. We will keep track of the number.
-    4. We will check if the number is within the range of INT_MAX and INT_MIN.
-    5. We will return the number.
+    Time Complexity:- O(N)
+    Space Complexity:- O(1)
+    N = number of characters in the input string
+
+    Intuition:-
+        - We have to return the number that is represented by the string.
+        - We have also consider the following cases,
+            i. If the string is empty, return 0.
+            ii. If the string has leading spaces, ignore them.
+            iii. If the string has a sign (+ or -), consider it.
+            iv. If the string has non-digit characters, ignore them.
+            v. If the number is out of range, return INT_MAX or INT_MIN.
+
+    Explanation:-
+        * Iterating over the string and ignoring the leading spaces.
+        * Checking if the next character is a sign (+ or -),
+            if it is, we would consider it and move to the next character.
+        * Then we would iterate over the string and check if the character is a digit,
+            if it is, we would convert it to an integer and add it to the number.
+        * If the number is out of range, we would return INT_MAX or INT_MIN.
+        * Finally, we would return the number with the sign.
 */
 class Solution {
 public:
     int myAtoi(string s) {
         int size = s.size();
-        if(size == 0)
-            return 0;
+        int i = 0;
 
-        long long int ans = 0;
-
-        int l = 0;
-        while(l < size && s[l] == ' ')
-            l++;
-
-        if(l == size)
-            return 0;
+        while(i < size && s[i] == ' ' )
+            i++;
 
         int sign = 1;
-        if(s[l] == '-'){
-            sign = -1;
-            l++;
-        }
-        else if(s[l] == '+')
-            l++;
-
-
-        while(l < size && isdigit(s[l])){
-            if(s[l] == ' ')
-                break;
-
-            ans = ans * 10 + s[l] - '0';
-            if(ans > INT_MAX){
-                if(sign == 1)
-                    return INT_MAX;
-                else
-                    return INT_MIN;
-            }
-            l++;
+        if(i < size && (s[i] == '-' || s[i] == '+')){
+            if(s[i] == '-')
+                sign = -1;
+            i++;
         }
 
-        return (int)(sign*ans);
+        long long int num = 0;
+        while(i < size && isdigit(s[i])){
+            int digit = s[i] - '0';
+            num = num * 10 + digit;
+
+            if(sign * num >= INT_MAX) return INT_MAX;
+            if(sign * num <= INT_MIN) return INT_MIN;
+
+            i++;
+        }
+
+        return (sign * num);
     }
 };
