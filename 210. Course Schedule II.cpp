@@ -2,7 +2,7 @@
     https://leetcode.com/problems/course-schedule-ii/
 */
 /*
-    Solution Approach:- Using DFS (Depth First Search)
+    Solution Approach:- Using DFS + Topological Sort
 
     Time Complexity: O(V + E)
     Space Complexity: O(V + E)
@@ -10,41 +10,42 @@
     V = number of vertices (courses)
     E = number of edges (prerequisites)
 
-    ----------------------------------------------------------------
-    This problem is a continuation of pr 207. Course Schedule.
-    (https://leetcode.com/problems/course-schedule/)
-    ----------------------------------------------------------------
+    Intuition:-
+        - Same as Pr. 207. Course Schedule (https://leetcode.com/problems/course-schedule/)
+        - But here the extra part is we have to keep a track of the order in which
+            the courses can be completed.
 
     Explanation:-
-        * The solution is same as pr 207. Course Schedule,
-            but we need to return the order of courses.
-        * That's why we are using a vector to store the order of courses
-            but that will be in reverse order, so we need to reverse it before returning.
-        * That's why are reversing the result vector before returning.
+        * Using the same solution as Pr. 207 Course Schedule.
+        * But if we detect a cycle, we return an empty vector.
+        * Else we keep on adding the visited course in the vector,
+            and we return it.
+        * Since, we have to start the course from the last course,
+            we reverse the vector and return it.
 */
 class Solution {
 public:
     bool dfs(
-        int node,
+        int currentCourse,
         unordered_map<int, vector<int>>& adj,
         unordered_set<int>& visited,
         unordered_set<int>& dfsVisited,
         vector<int>& orderStack
     ) {
-        visited.insert(node);
-        dfsVisited.insert(node);
+        visited.insert(currentCourse);
+        dfsVisited.insert(currentCourse);
 
-        for(auto it : adj[node]) {
-            if(visited.find(it) == visited.end()) {
-                if(dfs(it, adj, visited, dfsVisited, orderStack))
+        for(auto course : adj[currentCourse]) {
+            if(visited.find(course) == visited.end()) {
+                if(dfs(course, adj, visited, dfsVisited, orderStack))
                     return true;
             }
-            else if(dfsVisited.find(it) != dfsVisited.end())
+            else if(dfsVisited.find(course) != dfsVisited.end())
                 return true;
         }
 
-        dfsVisited.erase(node);
-        orderStack.push_back(node);
+        dfsVisited.erase(currentCourse);
+        orderStack.push_back(currentCourse);
         return false;
     }
 
