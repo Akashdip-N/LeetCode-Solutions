@@ -5,9 +5,10 @@
     Solution Approach:- Using DFS to detect cycle in a directed graph
 
     Time Complexity: O(V + E)
-    Space Complexity: O(V + E) + O(V) + O(V)
-    V = Number of vertices
-    E = Number of edges
+    Space Complexity: O(V + E)
+
+    V = Number of vertices (courses)
+    E = Number of edges (prerequisites)
 
     Intuition:-
         - So have been given a list of courses, and a list of prerequisites for each course.
