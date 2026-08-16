@@ -7,8 +7,8 @@
     Time Complexity: O(V + E)
     Space Complexity: O(V + E)
 
-    V = number of vertices (courses)
-    E = number of edges (prerequisites)
+    V = Number of vertices (courses)
+    E = Number of edges (prerequisites)
 
     Intuition:-
         - Same as Pr. 207. Course Schedule (https://leetcode.com/problems/course-schedule/)
