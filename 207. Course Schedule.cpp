@@ -9,36 +9,120 @@
     V = Number of vertices
     E = Number of edges
 
+    Intuition:-
+        - So have been given a list of courses, and a list of prerequisites for each course.
+        - We have to check if it's possible to finish all the courses.
+        - So we have to only make sure that we don't have any cycle in the graph,
+            because if we have a cycle, then we can't finish all the courses.
+                then we return false, else we return true.
+        Ex:-
+            numCourses = 2
+            prerequisites = [[1,0],[0,1]]
+
+            1 -> 0, 0 -> 1
+            So we have a cycle, so we can't finish all the courses, so we return false.
+
     Explanation:-
-        i. Create an adjacency list from the prerequisites.
-        ii. Create two sets, one for visited nodes and one for nodes in the current DFS path.
-        iii. For each unvisited node, perform a DFS.
-        iv. If we encounter a node that is already in the current DFS path,
-            a cycle is detected, and we return false.
-        v. If we complete the DFS without finding a cycle, we return true.
+        i. Main function:-
+            * Creating an adjacency list based on the prerequisites.
+                Example:-
+                    numCourses = 4
+                    prerequisites = [[1,0],[2,0],[3,1],[3,2]]
+
+                    adj = {
+                        0: [1, 2],
+                        1: [3],
+                        2: [3]
+                    }
+
+            * Iterating through 0 to numCourses - 1,
+                and for each course, checking if the course is already visited or not.
+            * Then we call the helper function to check cycle in the graph using DFS.
+            * If the call returns true, that means there is a cycle in the graph, so we return false.
+            * If there are no cycles in the graph, then we return true,
+                that means we can finish all the courses.
+
+        ii. Helper function:-
+            * Passing the following parameters to the helper function:-
+                i. Current course
+                ii. Adjacency list which maps the course to its prerequisites
+                iii. Visited set to keep track of the visited courses
+                iv. DFS visited set to keep track of the courses in the current DFS path
+            * Iterating through each prerequisites of the current course,
+                and checking if we have already visited that course or not.
+            * If we haven't visited that course,
+                then we call the helper function recursively,
+                    and if the call returns true,
+                        (that means there is a cycle in the graph),
+                            so we return true.
+            * If we have already visited that course,
+                then we check if that course is in the current DFS path or not,
+                    if it is, then we have a cycle in the graph,
+                        (
+                            That means to finish the current course,
+                            we need to finish the course from which we came to the current course
+                        )
+                        so we return true.
+
+            ---------------------------------------------------------------------------------
+                Ex:-
+                    numCourses = 2
+                    prerequisites = [[1,0],[0,1]]
+
+                    adj = {
+                        0: [1],
+                        1: [0]
+                    }
+
+                    Iteration 1:-
+                        currentCourse = 0
+                        visited = {0}
+                        dfsVisited = {0}
+
+                        Iterating through prereq of course 0, which is 1,
+                            calling dfs(1, adj, visited, dfsVisited)
+
+                    Iteration 2:-
+                        currentCourse = 1
+                        visited = {0, 1}
+                        dfsVisited = {0, 1}
+
+                        Iterating through prereq of course 1,
+                            which is 0,
+
+                            Checking if 0 is in the visited set,
+                                and it's present.
+                            Then checking if 0 is in the dfsVisited set,
+                                and it's present.
+
+                    So, we have a cycle in the graph, so we return true.
+            ---------------------------------------------------------------------------------
+            * When we have done iterating through all the prerequisites of the current course,
+                we remove it from the dfsVisited set,
+            * Since we have finished exploring all the prerequisites of the current course,
+                we return false, that means there is no cycle in the graph.
 */
 class Solution {
 public:
-    // Function to perform DFS and detect cycles
     bool dfs(
-        int node,
+        int currentCourse,
         unordered_map<int, vector<int>>& adj,
         set<int>& visited,
         set<int>& dfsVisited
     ) {
-        visited.insert(node);
-        dfsVisited.insert(node);
+        visited.insert(currentCourse);
+        dfsVisited.insert(currentCourse);
 
-        for(auto it : adj[node]) {
-            if(visited.find(it) == visited.end()) {
-                if(dfs(it, adj, visited, dfsVisited))
+        for(auto courses : adj[currentCourse]) {
+            if(visited.find(courses) == visited.end()) {
+                if(dfs(courses, adj, visited, dfsVisited))
                     return true;
             }
-            else if(dfsVisited.find(it) != dfsVisited.end())
+            else if(dfsVisited.find(courses) != dfsVisited.end())
                 return true;
         }
 
-        dfsVisited.erase(node);
+        dfsVisited.erase(currentCourse);
         return false;
     }
 
