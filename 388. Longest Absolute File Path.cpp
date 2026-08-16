@@ -8,30 +8,59 @@
     Space Complexity: O(N)
     N = length of the string
 
+    Intuition:-
+        - Given a string input representing the file system paths.
+        - The path is have several directories and sub-directories, and files.
+        - From the root the directories are seperated using '\n\t'.
+        - Each sub-directories are sperated using '\n\t\t'.
+        - We have to find the longest absolute path from the directory to the file.
+
+        Ex:-
+            input = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
+
+            visual representation of the input string is as follows:-
+                dir
+                 |---subdir1
+                 |---subdir2
+                        |----file.ext
+
+            output = 20 = "dir/subdir2/file.ext"
+
+        - For this we can using the concept of string stream,
+            and hashmap to store the length of the absolute path based on
+                the depth of the current directory or file.
+        - Based on each '\t' we can calculate the depth of the current directory or file.
+
+        Ex:-
+            input = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
+
+            depth[0] = 0
+            depth[1] = 4 = "dir/"
+            depth[2] = 12 = "dir/subdir2/"
+            depth[3] = 20 = "dir/subdir2/file.ext"
+
     Explanation:-
-        * Using the string stream to split each string by '\n' and
-            get the depth of the current file or directory by counting the number of '\t'.
-        * Then, using the 'find_last_of()' function to get
-                the last position of '\t' in the string.
-            i.e. input string = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
+        * Iterating over each new line separated string using string stream.
+        * Then we find the last occurrence of '\t' using find_last_of() function.
+            Ex:-
+                string = "dir",
+                find_last_of('\t') will return -1, because no '\t' is present in the string.
 
-            then first it would fetch "dir"
-            which has no '\t' so the depth is 0
+                string = "\tsubdir1",
+                find_last_of('\t') will return 0, because '\t' is present at index 0.
 
-            then it would fetch "\tsubdir1"
-            which has 1 '\t' so the depth is 1
-        * Then, using the substr function to get the string
-            excluding any special characters like '\t' or '\n'.
-        * In the substr function, the variable 'namePos' is used
-            to determine the starting position of the string to be extracted.
-        * Then we check if the string contains '.' or not,
-            if it does, that means it's a file,
-                then we calculate the length of the absolute path and store it.
-        * Else using the hash map and using the depth as a key,
-            we store the sum of the size of the current directory
-                and the size of the previous directory
-                    and add 1 for the '/' character.
-        * Finally, we return the longest length of the absolute path.
+                string = "\t\tfile.ext",
+                find_last_of('\t') will return 1, because '\t' is present at index 1.
+
+        * Then we find the word from the last occurrence of '\t' till the end of the string.
+        * Then we check if the current string is a file or not
+            by checking if the string contains a '.' character.
+        * If it's a file, then we store the maximum
+            between the current maximum length and
+                the sum of the current depth length and the length of the current string.
+        * If it's a directory, then we store the sum of the current depth length and
+            the length of the current string + 1 (for the '/' character) in the hashmap.
+        * At the end we return the maximum length of the absolute path to the file.
 */
 class Solution {
 public:
@@ -45,11 +74,10 @@ public:
 
         stack<string> s;
 
-        // This will fetch each line from the input string, split by '\n'
         while (getline(ss, line)) {
-            // Returns the last position of '\t' in the string
             auto namePos = line.find_last_of('\t') + 1;
             int depth = namePos;
+
             string name = line.substr(namePos);
             int size = name.size();
 
