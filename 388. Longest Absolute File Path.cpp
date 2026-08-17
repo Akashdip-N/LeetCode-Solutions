@@ -30,6 +30,9 @@
             and hashmap to store the length of the absolute path based on
                 the depth of the current directory or file.
         - Based on each '\t' we can calculate the depth of the current directory or file.
+        - Using the find_last_of() function of C++, we perform the above operation.
+
+        For more ref:- https://www.geeksforgeeks.org/cpp/stdstringfind_last_of-in-c-with-examples/
 
         Ex:-
             input = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
@@ -99,13 +102,25 @@ public:
     Space Complexity: O(N)
     N = length of the string
 
+    Intuition:-
+        - Same concept as above solution,
+            but instead of storing the length of the path in a hashmap,
+                we can use a stack to store the length of the path.
+        - The stack will store the length of the path at each depth.
+
     Explanation:-
-        * Same as previous solution, fetching individual strings.
-        * Checking if the depth of the current string is less than the size of the stack,
-            then we pop the stack until we reach the parent directory.
-        * Then we calculate the length of the current string and push it onto the stack.
-        * If the current string is a file, we calculate the length of the absolute path
-            and update the maximum length if it's greater than the previous maximum length.
+        * Iterating over each new line separated string using string stream.
+        * Then we find the last occurrence of '\t' using find_last_of() function.
+        * Then with the help of above operation we find the depth of the current directory or file.
+        * If the current depth is less than the size of the stack - 1,
+            that means the stack contains the length of the path of the parent directory,
+                so we pop the stack until we reach the parent directory.
+        * Then we calculate the length of the current path by adding the length of the parent directory
+            and the length of the current directory or file + 1 (for the '/' character).
+        * If the current string is a file, then we store the maximum
+            between the current maximum length and the length of the current path - 1 (for the '/' character).
+        * If it's a directory, then we push the length of the current path into the stack.
+        * At the end we return the maximum length of the absolute path to the file
 */
 
 class Solution {
