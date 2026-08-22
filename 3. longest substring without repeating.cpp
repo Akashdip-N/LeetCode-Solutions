@@ -2,83 +2,199 @@
     https://leetcode.com/problems/longest-substring-without-repeating-characters/
 */
 /*
-    Solution Approach:- Using Sliding Window
+    Solution Approach:- Using Sliding Window with Fixed Size Array
 
-    Time Complexity: O(n)
-    Space Complexity: O(min(m, n))
+    Time Complexity:- O(N)
+    Space Complexity:- O(1) (Constant Space, fixed size array of size 128)
+    N = length of the string
 
-    n = length of the string
-    m = length of the palindrome string
+    Intuition:-
+        - We have to find a substring without repeating characters from the given string.
+        - Using sliding window technique, we would maintain the window of the substring
+            without repeating characters.
+        - Using a fixed size array of size 128
+            to store the index of the current character of the string.
+            (
+                This vector would include the entrie ASCII character set,
+                    including the special characters, digits, and alphabets.
+            )
+        - And in each iteration,
+            we would check if the current character is already present in the hashmap,
+                and update the left pointer to the index of the current character + 1.
+        - Update the maximum length of the substring without repeating characters.
 
-    Explanation:
-        - Using set to store unique characters.
-        - Using two pointers, left and right, to maintain the window.
-        - If the character at the right pointer is already in the set,
-            we remove characters from the left pointer until it is not in the set.
-        - We then insert the character at the right pointer into the set.
-        - We calculate the maximum length of the substring without repeating characters.
-        - Finally, we return the maximum length.
+    Explanation:-
+        * Base case:- If the string is empty, return 0.
+            (
+                That means no characters are present in the string,
+                so the length of the longest substring without repeating characters is 0.
+            )
+        * Setting maxLength to 1, left pointer to 0, and vector of size 128.
+        * Iterating through index 0 till the end of the string,
+            and performing the following operations:-
+            i. Checking if the current character is already present in the vector,
+                - If it is,
+                    then updating the left pointer to the index of the current character + 1.
+            ii. Updating the maximum length of the substring without repeating characters.
+            iii. Storing the index of the current character in the vector.
+            Ex:-
+                Input: s = "abcabcbb"
+                Output: 3
+
+                Iteration 1:-
+                    left = 0, right = 0
+                    current character = 'a',
+                    is 'a' present in the vector? No
+
+                    maxLength = max(maxLength, right - left + 1) = 1
+                    maxLength = 1, mp['a'] = 1
+                Iteration 2:-
+                    left = 0, right = 1, maxLength = 2,
+                    current character = 'b',
+                    is 'b' present in the vector? No
+
+                    maxLength = max(maxLength, right - left + 1) = 2
+                    maxLength = 2, mp['b'] = 2
+                Iteration 3:-
+                    left = 0, right = 2, maxLength = 3,
+                    current character = 'c',
+                    is 'c' present in the vector? No
+
+                    maxLength = max(maxLength, right - left + 1) = 3
+                    maxLength = 3, mp['c'] = 3
+                Iteration 4:-
+                    left = 0, right = 3, maxLength = 3,
+                    current character = 'a',
+                    is 'a' present in the vector? Yes, at index 1
+                    left = max(left, mp['a']) = 1
+
+                    maxLength = max(maxLength, right - left + 1) = 3
+                    maxLength = 3, mp['a'] = 4
+                *
+                *
+                *
+                Final result: maxLength = 3
+
+        * Finally, returning the maximum length of the substring that we found.
 */
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int n = s.size();
-        if(n == 0) return 0;
+        int size = s.size();
+        if (size == 0) return 0;
 
-        int ans = 1, l = 0;
-        unordered_set<char> st;
+        int left = 0, maxLength = 0;
+        vector<int> mp(128, 0);
 
-        for(int r = 0; r < n; r++){
-            while(st.find(s[r]) != st.end()){
-                st.erase(s[l]);
-                l++;
-            }
+        for (int right = 0; right < size; right++) {
+            if (mp[s[right]] > 0)
+                left = max(left, mp[s[right]]);
 
-            st.insert(s[r]);
-            ans = max(ans, r - l + 1);
+            maxLength = max(maxLength, right - left + 1);
+            mp[s[right]] = right + 1;
         }
 
-        return ans;
+        return maxLength;
     }
 };
 
-/******************************************************************************/
+/******************************************************************************************/
 /*
-    Solution Approach:- Using Hash Map with Sliding Window
+    Solution Approach:- Using Sliding Window with Hash Map
 
-    Time Complexity: O(n)
-    Space Complexity: O(min(m, n))
+    Time Complexity: O(N)
+    Space Complexity: O(1) (Constant Space, fixed size map of size 128)
 
-    n = length of the string
-    m = length of the palindrome string
+    N = length of the string
 
-    Explanation:
-        - Using a hash map to store the last index of each character.
-        - Using two pointers, left and right, to maintain the window.
-        - If the character at the right pointer is already in the hash map,
-            we update the left pointer to the maximum of
-                its current value and the index of the character in the hash map.
-        - We calculate the maximum length of the substring without repeating characters.
-        - We store the index of the character in the hash map.
-        - Finally, we return the maximum length.
+    Intuition:-
+        - Same approach to the above approach.
+        - Instead using hash-map to store the
+            index of the current character of the string.
+
+    Explanation:-
+        * Same as the above approach
+        * Instead we are using hash-map to perform the
+            same operations as the above approach.
 */
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int n = s.size();
-        if(n == 0) return 0;
+        int size = s.size();
+        if(size == 0) return 0;
 
-        int l = 0, ans = 0;
-        unordered_map<char, int> mp;
+        int left = 0, maxLength = 0;
+        unordered_map<char, int> mp(128);
 
-        for(int r = 0; r < n; r++){
-            if(mp.find(s[r]) != mp.end())
-                l = max(l, mp[s[r]]);
+        for(int right = 0; right < size; right++){
+            if(mp.find(s[right]) != mp.end())
+                left = max(left, mp[s[right]]);
 
-            ans = max(ans, r - l + 1);
-            mp[s[r]] = r + 1;
+            maxLength = max(maxLength, right - left + 1);
+            mp[s[right]] = right + 1;
         }
 
-        return ans;
+        return maxLength;
+    }
+};
+
+/******************************************************************************************/
+/*
+    Solution Approach:- Using Sliding Window with Hash Set
+
+    Time Complexity: O(N)
+    Space Complexity: O(min(M, N))
+
+    N = length of the string
+    M = lenght of the substring without repeating characters
+
+    Intuition:-
+        - Similar to the above approach.
+        - Instead we would use a set to store the unique characters in the substring.
+        - And in each iteration, we would put the new character in the set.
+        - Update the maximum length of the substring without repeating characters.
+
+    Explanation:-
+        * Base case:- If the string is empty, return 0.
+            (
+                That means no characters are present in the string,
+                so the length of the longest substring without repeating characters is 0.
+            )
+
+        * Setting maxLength to 1, left pointer to 0,
+            and creating an unordered set to store the unique characters in the substring.
+        * Iterating through index 0 till the end of the string,
+            and performing the following operations:-
+            i. Checking if the current character is already present in the set,
+                - If it is,
+                    then removing each element from left until,
+                        the current character is not present in the set.
+                    And bringing the left pointer to one side to the right.
+            ii. Adding the current character to the set.
+            iii. Updating the maximum length of the substring without repeating characters.
+
+        * Finally, returning the maximum length of the substring that we found.
+*/
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int size = s.size();
+        if(size == 0)
+            return 0;
+
+        int maxLength = 1, left = 0;
+        unordered_set<char> st;
+
+        for(int right = 0; right < size; right++){
+            while(st.find(s[right]) != st.end()){
+                st.erase(s[left]);
+                left++;
+            }
+
+            st.insert(s[right]);
+            maxLength = max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
     }
 };
