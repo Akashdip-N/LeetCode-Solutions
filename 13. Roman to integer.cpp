@@ -1,34 +1,53 @@
 /*
     https://leetcode.com/problems/roman-to-integer/
+*/
+/*
+    Solution Approach:- Using HashMap
 
-    Solution:-
+    Time Complexity;- O(N)
+    Space Complexity: O(1) (Fixed HashMap size)
+    N = Length of the string
 
-    1. Create a map of char and int to store the roman values.
-    2. We are checking if the initial string value is smaller than the next value
-        then we are subtracting the value from the result.
-    3. Else we are adding the value to the result.
-    4. Return the result.
+    Intuition:-
+        - We have to find the integer value of the given roman numeral string.
+        - Roman numerals rule are as follows:-
+            i. If a smaller numeral appears before a larger numeral,
+                it is subtracted from the larger numeral.
+            ii. If a smaller numeral appears after a larger numeral,
+                it is added to the larger numeral.
+        - Using HashMap to fetch and store the integer value of each roman numeral character.
+        - Iterating over the string and at the end returing the final value.
+
+    Explanation:-
+        * Creating a hashmap and storing the integer value of each roman numeral character.
+        * Iterating over the string and checking the following conditions:-
+            i. If the current character is smaller than the next character,
+                then we subtract the current character's value from the final value.
+            ii. If the current character is greater than or equal to the next character,
+                then we add the current character's value to the final value.
+        * At the end of the iteration, we return the final value.
 */
 class Solution {
 public:
     int romanToInt(string s) {
-        unordered_map<char, int> map;
-        map['I']= 1;
-        map['V'] = 5;
-        map['X'] = 10;
-        map['L'] = 50;
-        map['C'] = 100;
-        map['D'] = 500;
-        map['M'] = 1000;
+        unordered_map<char, int> m;
+        m['I']= 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
 
-        int val = 0;
+        int num = 0;
 
-        for(int i = 0; i < s.size(); i++)
-            if ((i+1) < s.size() && (map[s[i]] < map[s[i+1]]))
-                val -= map[s[i]];
+        for(int i = 0; i < s.size(); i++) {
+            if ((i+1) < s.size() && (m[s[i]] < m[s[i+1]]))
+                num -= m[s[i]];
             else
-                val += map[s[i]];
+                num += m[s[i]];
+        }
 
-        return val;
+        return num;
     }
 };
