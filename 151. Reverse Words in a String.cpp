@@ -1,20 +1,39 @@
 /*
-    https://leetcode.com/problems/reverse-words-in-a-string/description/
+    https://leetcode.com/problems/reverse-words-in-a-string/
 */
 /*
-    Solution Approach: Two Pointers Approach
+    Solution Approach: Using Two Pointers
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = size of the input string
+
+    Intuition:-
+        - We have to reserve the occurance of the words in the string.
+        - We would use the two pointers concept to find the words in the string and
+            store them in the result string in reverse order.
+        - We would also trim the leading and trailing spaces from the string.
+        - At the end we would return the result string
+            containing the reversed words in the string.
 
     Explanation:
-        - First, trimming the leading and trailing spaces.
-        - Iterating from the end of the string to the beginning.
-        - For each word found, appending it to the result string along with a space.
-        - Moving the right pointer to the end of the next word.
-        - Skipping spaces between words.
-        - At the end, removing any trailing space from the result.
-        - Finally, returning the result string.
+        * Creating an empty string which would store the reversed words in the string.
+        * Using two pointersm and initializing the left to 0 and right to size - 1.
+        * Trimming the leading spaces from both the left and right side of the string.
+        * While the left pointer and right pointer does not cross each other,
+            we perform the following steps:
+            i. Storing the right pointer into a variable,
+                    that would be used as a start of the last word in the string.
+            ii. Finding the white space from the right side of the string,
+                    decrementing the right pointer.
+            iii. Storing the substring from the right pointer (i.e. the end variable)
+                    till the right pointer into the result string and adding a space after it.
+            iv. Updating the right pointer to the end variable - 1.
+            v. Trimming the leading spaces from the right side of the string.
+        * Finally, we check if the result string is not empty and
+            the last character of the result string is a space,
+                we pop the last character from the result string.
+        * Then we return the result string which contains the reversed words in the string.
 */
 class Solution {
 public:
@@ -32,22 +51,17 @@ public:
         while(left <= right) {
             int end = right;
 
-            // Finding the starting index of the word
             while(end >= left && s[end] != ' ')
                 end--;
 
-            // Adding the word to the result
             result += s.substr(end + 1, right - end) + ' ';
 
-            // Moving the right pointer to the end of the next word
             right = end - 1;
 
-            // Skipping spaces before the next word
             while(right >= left && s[right] == ' ')
                 right--;
         }
 
-        // Removing the trailing space if exists
         if(!result.empty() && result.back() == ' ')
             result.pop_back();
 
