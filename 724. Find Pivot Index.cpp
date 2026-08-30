@@ -29,7 +29,7 @@
                 - If not, we add the current number to the left sum and
                     continue to the next index.
         * If we reach the end of the array and no pivot index is found, we return -1.
- */
+*/
 class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
