@@ -2,20 +2,66 @@
     https://leetcode.com/problems/subarray-sum-equals-k
 */
 /*
-    Solution Approach:- Using Prefix Sum and Hash Map
+    Solution Approach:- Using HashMap and Prefix Sum
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    n = size of the input array
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+    N = size of the input array
+
+    Intuition:-
+        - We have to find the number of subarrays that can be made out of the given array
+            such that the sum of the elements in the subarray is equal to K.
+        - Using prefix sum, technique to find the subarrays that sum to K can be optimized.
+        - For each number we adding to the current sum,
+            we check if have seen a prefix sum that is equal to currentSum - K.
+                If yes, then we add the count of that prefix sum to the total count of subarrays.
+        - At the end we return the total count of subarrays that sum to K.
 
     Explanation:
-        - We maintain a running sum of the elements in the array.
-        - We use a hash map to store the count of each prefix sum encountered.
-        - For each element, we check
-            if the difference between the current sum and
-                k exists in the hash map.
-        - If it does, it means there are subarrays that sum to k.
-        - We update the count of the current prefix sum in the hash map.
+        * Storing the value of 1 at index 0 in the hash map because,
+            then we can consider the subarray from the start of the array to the current index.
+            (
+                Ex:-
+                    nums = [3, 2, 1]
+                    K = 3
+
+                    Iteration 1:
+                        currentSum = 3
+                        currentSum - K = 0
+                        count += prefixSumCount[0] = 1
+            )
+        * Iterating through each number in the array and adding it to the current sum,
+            and performing the following steps:-
+            - Adding the current num to the current sum.
+            - Checking if the current sum - K exists in the hash map,
+                if yes, then we add the count of that prefix sum to the total count of subarrays.
+            - Finally, we increment the count of the current sum in the hash map.
+            (
+                Ex:-
+                    nums = [3, 2, 1]
+                    K = 3
+
+                    Iteration 1:
+                        currentSum = 3
+                        currentSum - K = 0
+                        count += prefixSumCount[0] = 1
+                        prefixSumCount[3] = 1
+
+                    Iteration 2:
+                        currentSum = 5
+                        currentSum - K = 2
+                        count += prefixSumCount[2] = 0
+                        prefixSumCount[5] = 1
+
+                    Iteration 3:
+                        currentSum = 6
+                        currentSum - K = 3
+                        count += prefixSumCount[3] = 1
+                        prefixSumCount[6] = 1
+
+                    Count = 2
+            )
+        * Finally, we return the total count of subarrays that sum to K.
 */
 class Solution {
 public:
