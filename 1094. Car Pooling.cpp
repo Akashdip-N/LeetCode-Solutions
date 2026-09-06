@@ -28,6 +28,10 @@
         * For each trip, performing the following operations:
             - Adding the number of passengers at the start location.
             - Subtracting the number of passengers at the end location.
+            (
+                This is because, the passengers would be dropped off at the end location,
+                    so we would decrease the number of passengers at that stop.
+            )
         * After processing all the trips, we would iterate through the fixed size array,
             and for each stop, we would add the passengers for that stop
                 and check if the current number of passengers exceeds the capacity.
