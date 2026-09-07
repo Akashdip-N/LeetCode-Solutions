@@ -4,7 +4,7 @@
 /*
     Solution Approach:- Using Sorting and Two Pointers
 
-    Time Complexity:- O(NlogN + M) (Because each time we would put only 3 suggestions in the result)
+    Time Complexity:- O(N * L * logN + M * L)
     Space Complexity:- O(M * L)
     N = number of products / words in the products list
     M = length of the searchWord
@@ -65,24 +65,26 @@
 class Solution {
 public:
     vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
-        sort(products.begin(), products.end());
+        sort(products.begin(), products.end()); // O(N * logN * L)
         vector<vector<string>> result;
 
         int left = 0;
         int right = products.size() - 1;
 
+        // O(M)
         for (int i = 0; i < searchWord.size(); i++) {
             char c = searchWord[i];
 
+            // O(N)
             while (left <= right && (products[left].size() <= i || products[left][i] != c))
                 left++;
 
-
+            // O(N)
             while (left <= right && (products[right].size() <= i || products[right][i] != c))
                 right--;
 
             vector<string> currentSuggestions;
-            for (int j = 0; j < 3 && left + j <= right; j++)
+            for (int j = 0; j < 3 && left + j <= right; j++) // O(L * M)
                 currentSuggestions.push_back(products[left + j]);
 
             result.push_back(currentSuggestions);
