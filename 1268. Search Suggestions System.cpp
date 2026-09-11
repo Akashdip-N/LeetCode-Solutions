@@ -84,8 +84,8 @@ public:
                 right--;
 
             vector<string> currentSuggestions;
-            for (int j = 0; j < 3 && left + j <= right; j++) // O(L * M)
-                currentSuggestions.push_back(products[left + j]);
+            for (int j = left, i = 0; j <= right && i < 3; j++, i++) // O(L * M)
+                currentSuggestions.push_back(products[j]);
 
             result.push_back(currentSuggestions);
         }
