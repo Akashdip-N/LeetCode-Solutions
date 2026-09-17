@@ -5,7 +5,7 @@
     Solution Approach:- Using String Stream
 
     Time Complexity:- O(N)
-    Space Complexity:- O(N)
+    Space Complexity:- O(N) (Because of using String Stream)
     N = Size of the input query
 
     Intuition:-
