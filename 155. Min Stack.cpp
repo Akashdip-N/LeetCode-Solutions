@@ -8,29 +8,43 @@
     Space Complexity: O(N)
     N = Number of elements in the stack
 
+    Intuition:-
+        - We have to implement a stack that supports the following operations in constant time:
+            1. push(x) -- Push element x onto stack.
+            2. pop() -- Removes the element on top of the stack.
+            3. top() -- Get the top element.
+            4. getMin() -- Retrieve the minimum element in the stack.
+
+        - Using two stacks, to perform the above operations in constant time.
+            1. One stack to store the actual data.
+            2. Another stack to store the minimum elements.
+
     Explanation:
-        * We use two stacks,
-            one to store the actual data and
-                another to store the minimum elements.
-        * When pushing an element,
-            we check if it's smaller than or equal to the current minimum (top of minStack).
-                If yes, we push it onto minStack as well.
-        * When popping an element,
-            we check if it's equal to the current minimum.
-                If yes, we pop it from minStack as well.
-        * The top() function returns the top element of the data stack.
-        * The getMin() function returns the top element of the minStack,
-            which is the minimum element in the data stack.
+        * Creating two stacks, one for the actual data and another for the minimum elements.
+
+        Push Operation:-
+            * Base case if the minstack is empty, then we push the first element into the minstack.
+            * Or if the new element is less than or equal to the top value of the minstack,
+                then we push the new element into the minstack.
+            * Then we push the element into the data stack.
+
+        Pop Operation:-
+            * First we check if the top value of the minStack and the data stack are the same,
+                then we pop the top value of the minStack.
+            * Then we pop the top value of the data stack.
+
+        Top Operation:-
+            * We return the top value of the data stack.
+
+        GetMin Operation:-
+            * We return the top value of the minStack.
 */
 class MinStack {
     private:
         stack<int> data;
         stack<int> minStack;
 public:
-    MinStack() {
-        data = stack<int>();
-        minStack = stack<int>();
-    }
+    MinStack() {}
 
     void push(int val) {
         if(minStack.empty() || val <= minStack.top())
