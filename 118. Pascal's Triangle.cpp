@@ -2,34 +2,51 @@
     https://leetcode.com/problems/pascals-triangle/
 */
 /*
-    Solution:
+    Solution Approach:- Using Two Pointers
 
-    1. Initialize a 2D vector triangle with the first row as {1}.
-    2. Iterate from 1 to numRows.
-    3. Create a new vector row.
-    4. Push 1 to the row.
-    5. Iterate from 1 to prevRow.size() - 1.
-    6. Push prevRow[j - 1] + prevRow[j] to the row.
-    7. Push 1 to the row.
-    8. Push the row to the triangle.
-    9. Return the triangle.
+    Time Complexity:- O(N^2)
+    Space Complexity:- O(N^2)
+    N = numRows
+
+    Intuition:-
+        - Given number of rows, we need to generate Pascal's triangle.
+
+        - Adding the number of the previous row's two adjacent numbers in the current row.
+
+    Explanation:-
+        * Creating a 2D vector to store the triangle.
+        * Iterating from 0 till the number of rows, and performing the following steps:-
+            i. Creating a vector of size i + 1 and initializing all the elements to 1.
+            ii. Iterating from 1 till i, and
+                storing the sum of the two adjacent numbers from the
+                    previous row in the current row.
+                (
+                    We are starting from 1 because,
+                        for the first two rows, we would only have 1's,
+                            and we don't want to add the first and the last elements of the row.
+
+                    Ex:-
+                        Pascal's triangle for 5 rows would look like this:-
+                            1
+                           1 1
+                          1 2 1     "Perform the addition operation from this row"
+                         1 3 3 1
+
+                )
+            iii. Pushing the newly created row onto the triangle vector.
+        * At the end, returning the triangle vector.
 */
-
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> triangle;
-        triangle.push_back({1});
 
-        for (int i = 1; i < numRows; i++) {
-            vector<int> row;
-            vector<int>& prevRow = triangle[i - 1];
-            row.push_back(1);
+        for (int i = 0; i < numRows; i++) {
+            vector<int> row(i + 1, 1);
 
-            for (int j = 1; j < prevRow.size(); j++)
-                row.push_back(prevRow[j - 1] + prevRow[j]);
+            for (int j = 1; j < i; j++)
+                row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
 
-            row.push_back(1);
             triangle.push_back(row);
         }
 
