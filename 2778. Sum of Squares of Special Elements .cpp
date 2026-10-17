@@ -6,6 +6,7 @@
 
     Time Complexity: O(N)
     Space Complexity: O(1)
+    N = Size of the array
 
     Intuition:-
         - Given us an integer array.
