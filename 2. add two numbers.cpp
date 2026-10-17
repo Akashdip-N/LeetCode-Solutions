@@ -2,21 +2,39 @@
     https://leetcode.com/problems/add-two-numbers/
 */
 /*
-    Solution Approach: Using a dummy node to simplify the code.
+    Solution Approach:- Using Linked List
 
-    * Created two nodes, one for the result and one for the current node.
-    * Initialized the digit v1, v2 to 0
-    * Using while loop to itertate over the two linked lists,
-        checking if the either of the linked lists is null,
-            then we setting the value of v1 or v2 to 0,
-                this is done in case when the size of the linked list are different.
-    * Storing the 1s place in the result linked list.
-    * Storing the 10s place in the rem variable, to use it for the next iteration.
+    Time Complexity:- O(max(N, M))
+    Space Complexity:- O(max(N, M))
+    N = size of l1
+    M = size of l2
 
-    * After the loop is complete, checking if the rem is 1,
-        which means that there is a carry left over,
-            so we create a new node with value 1,
-                and set the next pointer of the current node to this new node.
+    Intuition:-
+        - Given us two Linked List in reverse order.
+        - We have to add the two numbers from each of the linked list and
+            return the sum in reverse order as well.
+
+        - We have to keep track of the carry while adding the two numbers.
+        - Using a dummy node to store the result.
+        - At the end, we would return the next of the dummy node as the result.
+
+    Explanation:-
+        * Creating a dummy node 'res' to store the result.
+        * Using a pointer 'node' to traverse the result linked list.
+        * Initializing the variables remainder, v1 and v2 to 0.
+        * Iterating the loop while both l1 and l2 are not null,
+            performing the following operations in each iteration:-
+            i. Checking if l1 is null, then we set the value of l1 to 0,
+                else we store the value of the current l1 node in v1 and move to the next node.
+            ii. Performing the same operation for l2 and storing the value in v2.
+            iii. Storing the sum of v1, v2 and remainder in a variable 'sum'.
+            iv. Updating the value of remainder to sum/10.
+            v. Creating a new node with the value of sum%10 and
+                linking it to the next of the current node.
+            vi. Moving the pointer 'node' to the next node.
+        * After the loop, if the remainder is 1,
+            we create a new node with the value of 1 and link it to the next of the current node.
+        * Finally, we return the next of the dummy node 'res' as the result.
 */
 
 class Solution {
