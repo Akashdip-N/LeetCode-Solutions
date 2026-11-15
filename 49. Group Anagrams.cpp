@@ -4,19 +4,52 @@
 /*
     Solution Approach:- Using Count Array
 
-    Time Complexity: O(N * k)
-    Space Complexity: O(N * k)
+    Time Complexity: O(N * K)
+    Space Complexity: O(N * K)
 
     N = number of strings in the input list
-    k = lenght of the string we are currently working
+    K = lenght of the string we are currently working
+
+    Problem Statement:-
+        - We have been given a list of strings and we have to group the anagrams together.
+        - Anagrams are words that have the same characters but in different order.
+        Ex:-
+            - "eat" and "tea" are anagrams of each other.
+            - "tan" and "nat" are anagrams of each other.
+            - "bat" is not an anagram of any other string in the list.
+
+            vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+            Output:-              [["bat"],["tan","nat"],["eat","tea","ate"]]
+
+    Intuition:-
+        - Using a count array of fixed size 26 to count the frequency of each character in the string.
+        - By using this concept we can create a unique key for each group of anagrams,
+            using `#` as a separator between the counts of each character.
+        - And storing the strings based on the key in a hash map.
 
     Explanation:
-        - For each string, we create a key based on the frequency of each character.
-        - We use a vector of size 26 to count the occurrences of
-            each character in the string, since the characters are in lowercase.
-        - The key is formed by concatenating the counts
-            of each character, separated by a delimiter.
-        - We then use this key to group anagrams together in a hash map.
+        * Creating a hashmap to store the string as a key and the vector of strings as a value.
+        * Iterating through the string list, and perfomring the following operation for each string:-
+            - Creating the count array of size 26 and initializing it with 0.
+            - For each character in the string,
+                - First converting the characters into an ASCII value
+                    by substracting the ASCII value of 'a' from the character.
+                - Then incrementing the count of that character in the count array.
+            - Creating a key by iterating through the count array and appending the
+                count of each character to the key string with `#` as a separator.
+            - Storing the string in the hashmap based on the key.
+            Ex:-
+                string:-["eat","tea","taaan","ate","naaat","bat"]
+
+                The hashmap will look like this after processing all the strings:-
+                {
+                    "1#0#0#0#1#0#0#0#0#0#0#0#0#0#0#0#0#0#0#1#0#0#0#0#0#0#": ["eat", "tea", "ate"],
+                    "3#0#0#0#0#0#0#0#0#0#0#0#0#1#0#0#0#0#0#1#0#0#0#0#0#0#": ["taaan", "naaat"],
+                    "1#1#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#1#0#0#0#0#0#0#": ["bat"]
+                }
+
+        * Finally, iterating through the hashmap and pushing the vector of strings to the answer vector.
+        * Returning the answer vector.
 */
 class Solution {
 public:
@@ -30,6 +63,7 @@ public:
             for(char c : str)
                 count[c - 'a']++;
 
+            // Running for 26 times only each time, hence O(1) time complexity
             for(int i = 0; i < 26; i++)
                 key += to_string(count[i]) + "#";
 
@@ -44,22 +78,37 @@ public:
     }
 };
 
-/**************************************************************************************/
+/******************************************************************************************************/
 /*
     Solution Approach:- Using sorting
 
-    Time Complexity: O(N * k log k)
-    Space Complexity: O(N * k)
+    Time Complexity: O(N * K log K)
+    Space Complexity: O(N * K)
 
     N = number of strings in the input list
-    k = lenght of the string we are currently working
+    K = lenght of the string we are currently working
 
-    Explanation:
+    Intuition:-
+        - Using string sorting technique to create a unique key for each group of anagrams.
         - For each string in the input list, we sort the string to create a key.
         - Storing the string based on the sorted key in a hash map.
-        - Pushing the map second value,
-            i.e. the vector of strings to the answer vector.
-        - Finally returning the answer vector.
+        Ex:-
+            string:-["eat","tea","taaan","ate","naaat","bat"]
+
+            The hashmap will look like this after processing all the strings:-
+            {
+                "aet": ["eat", "tea", "ate"],
+                "aaant": ["taaan", "naaat"],
+                "abt": ["bat"]
+            }
+
+    Explanation:
+        * Creating a hashmap to store the string as a key and the vector of strings as a value.
+        * Iterating through the string list, and perfomring the following operation for each string:-
+            - Sorting the string to create a key.
+            - Storing the string in the hashmap based on the sorted key.
+        * Finally, iterating through the hashmap and pushing the vector of strings to the answer vector.
+        * Returning the answer vector.
 */
 class Solution {
 public:
